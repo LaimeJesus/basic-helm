@@ -9,6 +9,6 @@ entries:
     name: basic-test
     type: application
     urls:
-    - https://github.com/LaimeJesus/basic-test/basic-test-0.1.1.tgz
+    - https://laimejesus.github.io/basic-test/basic-test-0.1.1.tgz
     version: 0.1.1
 generated: "2020-10-23T11:46:43.31794215-03:00"
