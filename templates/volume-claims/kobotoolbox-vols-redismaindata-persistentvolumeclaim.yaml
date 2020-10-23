@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    creationTimestamp: null
-    labels:
-        io.kompose.service: kobotoolbox-vols-redismaindata
+    # creationTimestamp: null
+    # labels:
+    #     io.kompose.service: kobotoolbox-vols-redismaindata
     name: kobotoolbox-vols-redismaindata
-    namespace: kobotoolbox
 spec:
     storageClassName: manual
     volumeName: kobotoolbox-vols-redismaindata

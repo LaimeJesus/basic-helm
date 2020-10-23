@@ -5,7 +5,6 @@ metadata:
     # labels:
     #     io.kompose.service: kobotoolbox-log-rabbitmq
     name: kobotoolbox-log-rabbitmq
-    namespace: kobotoolbox
 spec:
     storageClassName: manual
     volumeName: kobotoolbox-log-rabbitmq

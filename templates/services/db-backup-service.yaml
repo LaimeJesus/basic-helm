@@ -4,7 +4,6 @@ metadata:
     labels:
         io.kompose.service: db-backup
     name: db-backup
-    namespace: kobotoolbox
 spec:
     selector:
         io.kompose.service: db-backup

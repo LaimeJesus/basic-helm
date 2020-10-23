@@ -4,7 +4,6 @@ metadata:
     labels:
         io.kompose.service: redis-main
     name: redis-main
-    namespace: kobotoolbox
 spec:
     selector:
         io.kompose.service: redis-main

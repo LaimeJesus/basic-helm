@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    creationTimestamp: null
-    labels:
-        io.kompose.service: kobotoolbox-vols-mongo
+    # creationTimestamp: null
+    # labels:
+    #     io.kompose.service: kobotoolbox-vols-mongo
     name: kobotoolbox-vols-mongo
-    namespace: kobotoolbox
 spec:
     storageClassName: manual
     volumeName: kobotoolbox-vols-mongo
