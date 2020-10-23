@@ -3,7 +3,17 @@ entries:
   basic-test:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-23T11:46:43.318651636-03:00"
+    created: "2020-10-23T12:28:34.308589694-03:00"
+    description: A Helm chart for Kubernetes
+    digest: b52275a8592f1807b38d9008f01c6c6b11b73561db2f1acbcf56fe1223e856c7
+    name: basic-test
+    type: application
+    urls:
+    - https://laimejesus.github.io/basic-test/basic-test-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2020-10-23T12:28:34.306355737-03:00"
     description: A Helm chart for Kubernetes
     digest: 2b59a1ed51e733b6a53ef2e43b4bd79a4c0b93826bab9571f3ee6da3f1f08ebc
     name: basic-test
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://laimejesus.github.io/basic-test/basic-test-0.1.1.tgz
     version: 0.1.1
-generated: "2020-10-23T11:46:43.31794215-03:00"
+generated: "2020-10-23T12:28:34.305320861-03:00"
