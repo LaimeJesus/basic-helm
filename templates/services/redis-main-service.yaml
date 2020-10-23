@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        io.kompose.service: redis-main
+    name: redis-main
+    namespace: kobotoolbox
+spec:
+    selector:
+        io.kompose.service: redis-main
+    ports:
+      - name: "6379"
+        port: 6379
+        targetPort: 6379
+status: {}

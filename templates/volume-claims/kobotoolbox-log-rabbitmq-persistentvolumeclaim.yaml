@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    # creationTimestamp: null
+    # labels:
+    #     io.kompose.service: kobotoolbox-log-rabbitmq
+    name: kobotoolbox-log-rabbitmq
+    namespace: kobotoolbox
+spec:
+    storageClassName: manual
+    volumeName: kobotoolbox-log-rabbitmq
+    accessModes:
+      - ReadWriteOnce
+    resources:
+        requests:
+            storage: 100Mi
+status: {}

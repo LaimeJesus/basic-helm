@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kobotoolbox-vols-redismaindata
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /var/lib/tmp/kobotoolbox-vols-redismaindata
+    type: DirectoryOrCreate
