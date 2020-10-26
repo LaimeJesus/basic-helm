@@ -38,6 +38,8 @@ spec:
                 volumeMounts:
                   - mountPath: /data/
                     name: kobotoolbox-vols-redismaindata
+            imagePullSecrets:
+              - name: dockerhub
             restartPolicy: Always
             serviceAccountName: ""
             volumes:

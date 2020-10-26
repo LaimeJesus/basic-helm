@@ -49,6 +49,8 @@ spec:
                     name: kobotoolbox-vols-db
                   - mountPath: /srv/backups
                     name: kobotoolbox-backups-postgres
+            imagePullSecrets:
+              - name: dockerhub
             restartPolicy: Always
             serviceAccountName: ""
             volumes:

@@ -41,6 +41,8 @@ spec:
                 volumeMounts:
                   - mountPath: /var/log/rabbitmq
                     name: kobotoolbox-log-rabbitmq
+            imagePullSecrets:
+              - name: dockerhub
             restartPolicy: Always
             serviceAccountName: ""
             volumes:

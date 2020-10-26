@@ -89,6 +89,8 @@ spec:
                     name: kobotoolbox-vols-mongo
                   - mountPath: /srv/backups
                     name: kobotoolbox-backups-mongo
+            imagePullSecrets:
+              - name: dockerhub
             restartPolicy: Always
             serviceAccountName: ""
             volumes:

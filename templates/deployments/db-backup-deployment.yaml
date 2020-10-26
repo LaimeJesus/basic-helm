@@ -63,6 +63,8 @@ spec:
                 volumeMounts:
                   - mountPath: /backups
                     name: kobotoolbox-backups-postgres
+            imagePullSecrets:
+              - name: dockerhub
             restartPolicy: Always
             serviceAccountName: ""
             volumes:
