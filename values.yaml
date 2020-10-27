@@ -745,5 +745,5 @@ volumeClaims:
     storageCapacity: "100Mi"
   - name: "kobotoolbox-vols-static-kpi"
     storageCapacity: "100Mi"
-  - name: "kobotoolbox-vols-static-whoosh"
+  - name: "kobotoolbox-vols-whoosh"
     storageCapacity: "100Mi"
