@@ -113,7 +113,7 @@ deployments:
       - name: kobotoolbox-backups-mongo
         persistentVolumeClaim:
           claimName: kobotoolbox-backups-mongo
-  - name: mongo-btsync
+  - name: mongo
     image: scanterra/kobotoolbox_mongo:latest
     imagePullPolicy: Always
     mounts:
