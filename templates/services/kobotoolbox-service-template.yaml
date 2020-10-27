@@ -11,6 +11,6 @@ spec:
     io.kompose.service: {{ .name }}
   ports:
     {{- with .ports }}
-      {{- toJson . | indent 4 }}
+      {{- toYaml . | trim | nindent 4 }}
     {{- end }}
 {{ end }}
