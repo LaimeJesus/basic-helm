@@ -39,7 +39,7 @@ spec:
         {{- toYaml . | trim | nindent 8 }}
       {{- end }}
       restartPolicy: {{ $.Values.restartPolicy }}
-      serviceAccountName: {{ $.Values.serviceAccountName }}
+      serviceAccountName: ""
       {{- if not (empty .volumes) }}
       volumes:
         {{- with .volumes }}
