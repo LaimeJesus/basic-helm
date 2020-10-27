@@ -1,0 +1,16 @@
+{{ range .Values.services.definitions }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: {{ .name }}
+  name: {{ .name }}
+spec:
+  selector:
+    io.kompose.service: {{ .name }}
+  ports:
+    {{- with .ports }}
+      {{- toJson . | indent 4 }}
+    {{- end }}
+{{ end }}

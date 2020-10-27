@@ -53,3 +53,258 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+pullSecrets:
+  - name: dockerhub
+restartPolicy: Always
+serviceAccountName: ""
+
+deployments:
+  definitions:
+  - name: db-backup
+    image: scanterra/pg-backup:9.6
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /backups
+        name: kobotoolbox-backups-postgres
+    envs:
+      - name: ARCHIVE_FILENAME
+        value: /backups/postgres_backup
+      - name: DUMPPREFIX
+        value: postgres_backup
+      - name: PGHOST
+        value: postgres
+      - name: PGPASSWORD
+        value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
+      - name: PGPORT
+        value: "5432"
+      - name: PGUSER
+        value: kobo_superadmin
+      - name: POSTGRES_DBNAME
+        value: kobotoolbox
+      - name: POSTGRES_HOST
+        value: postgres
+      - name: POSTGRES_PASSWORD
+        value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
+      - name: POSTGRES_PORT
+        value: "5432"
+      - name: POSTGRES_USER
+        value: kobo_superadmin
+      - name: WITH_POSTGIS
+        value: "1"
+    volumes:
+      - name: kobotoolbox-backups-postgres
+        persistentVolumeClaim:
+          claimName: kobotoolbox-backups-postgres
+  - name: mongo-btsync
+    image: scanterra/btsync:rancher
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /web
+        name: kobotoolbox-backups-mongo
+    envs:
+      - name: DEVICE
+        value: ScanTerra Production - Mongo
+      - name: SECRET
+        value: ATCAWOQEHQJIGF6SLXUBL3BE6D2ZP3JF7
+      - name: STANDBY_MODE
+        value: "TRUE"
+    volumes:
+      - name: kobotoolbox-backups-mongo
+        persistentVolumeClaim:
+          claimName: kobotoolbox-backups-mongo
+  - name: mongo-btsync
+    image: scanterra/kobotoolbox_mongo:latest
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /srv/db
+        name: kobotoolbox-vols-mongo
+      - mountPath: /srv/backups
+        name: kobotoolbox-backups-mongo
+    envs:
+      - name: CSRF_COOKIE_DOMAIN
+        value: .scanterra.com
+      - name: DJANGO_ALLOWED_HOSTS
+        value: .scanterra.com
+      - name: DJANGO_SECRET_KEY
+        value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
+      - name: ENKETO_API_TOKEN
+        value: enketoapitoken
+      - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
+        value: local.scancollect-form
+      - name: ENKETO_SERVER_NAME
+        value: local.scancollect-form.scanterra.com
+      - name: ENKETO_URL
+        value: https://local.scancollect-form.scanterra.com
+      - name: KOBOCAT_MEDIA_BACKUP_SCHEDULE
+        value: '#0 0 * * 0'
+      - name: KOBOCAT_PUBLIC_SUBDOMAIN
+        value: local.scancollect
+      - name: KOBOCAT_SERVER_NAME
+        value: local.scancollect.scanterra.com
+      - name: KOBOCAT_URL
+        value: https://local.scancollect.scanterra.com
+      - name: KOBOFORM_PUBLIC_SUBDOMAIN
+        value: local.scancollect-form-edit
+      - name: KOBOFORM_SERVER_NAME
+        value: local.scancollect-form-edit.scanterra.com
+      - name: KOBOFORM_URL
+        value: https://local.scancollect-form-edit.scanterra.com
+      - name: KOBO_SUPERUSER_PASSWORD
+        value: HsBUDwh6#JwVpBR@VILU
+      - name: KOBO_SUPERUSER_USERNAME
+        value: kobo_superadmin
+      - name: KOBO_SUPPORT_EMAIL
+        value: soporte@scanterra.com
+      - name: MONGO_BACKUP_ARCHIVE_FILENAME
+        value: mongo_backup.mongorestore.tar.gz
+      - name: MONGO_BACKUP_SCHEDULE
+        value: 0 1 * * *
+      - name: MONGO_DATA
+        value: /srv/db
+      - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
+        value: postgres_backup_kobotoolbox.pg_restore
+      - name: POSTGRES_BACKUP_SCHEDULE
+        value: '#0 2 * * 0'
+      - name: PUBLIC_DOMAIN_NAME
+        value: local.scanterra.com
+      - name: USE_ENV_VAR
+        value: "true"
+    volumes:
+      - name: kobotoolbox-vols-mongo
+        persistentVolumeClaim:
+            claimName: kobotoolbox-vols-mongo
+      - name: kobotoolbox-backups-mongo
+        persistentVolumeClaim:
+            claimName: kobotoolbox-backups-mongo
+  - name: postgres
+    image: scanterra/postgis:9.6-2.4
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /var/lib/postgresql
+        name: kobotoolbox-vols-db
+      - mountPath: /srv/backups
+        name: kobotoolbox-backups-postgres
+    envs:
+      - name: ALLOW_IP_RANGE
+        value: 0.0.0.0/0
+      - name: POSTGRES_DBNAME
+        value: kobotoolbox
+      - name: POSTGRES_PASSWORD
+        value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
+      - name: POSTGRES_USER
+        value: kobo_superadmin
+    volumes:
+      - name: kobotoolbox-vols-db
+        persistentVolumeClaim:
+          claimName: kobotoolbox-vols-db
+      - name: kobotoolbox-backups-postgres
+        persistentVolumeClaim:
+          claimName: kobotoolbox-backups-postgres
+  - name: rabbit
+    image: scanterra/kobotoolbox_rabbit:latest
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /var/log/rabbitmq
+        name: kobotoolbox-log-rabbitmq
+    envs:
+      - name: RABBITMQ_LOG_BASE
+        value: /var/log/rabbitmq
+    volumes:
+      - name: kobotoolbox-log-rabbitmq
+        persistentVolumeClaim:
+          claimName: kobotoolbox-log-rabbitmq
+  - name: redis-cache
+    image: scanterra/kobotoolbox_redis_cache:2.6
+    imagePullPolicy: Always
+  - name: redis-main
+    image: scanterra/kobotoolbox_redis_main:2.6
+    imagePullPolicy: Always
+    mounts:
+      - mountPath: /data/
+        name: kobotoolbox-vols-redismaindata
+    volumes:
+      - name: kobotoolbox-vols-redismaindata
+        persistentVolumeClaim:
+          claimName: kobotoolbox-vols-redismaindata
+
+services:
+  definitions:
+  - name: "db-backup"
+    ports:
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
+  - name: "mongo-btsync"
+    ports:
+    - name: "55555"
+      port: 55555
+      targetPort: 55555
+    - name: "8888"
+      port: 8888
+      targetPort: 8888
+  - name: "mongo"
+    ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  - name: "postgres"
+    ports:
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
+  - name: "rabbit"
+    ports:
+    - name: "5672"
+      port: 5672
+      targetPort: 5672
+  - name: "redis-cache"
+    ports:
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
+  - name: "redis-main"
+    ports:
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
+
+volumeClaims:
+  storageClass: "manual"
+  accessMode: "ReadWriteOnce"
+  definitions:
+  - name: "kobotoolbox-backups-kobocat"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-backups-mongo"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-backups-postgres"
+    storageCapacity: "100Mi"
+
+  - name: "kobotoolbox-log-kobocat"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-log-kpi"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-log-nginx"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-log-rabbitmq"
+    storageCapacity: "100Mi"
+
+  - name: "kobotoolbox-secrets"
+    storageCapacity: "100Mi"
+
+  - name: "kobotoolbox-vols-db"
+    storageCapacity: "1Gi"
+  - name: "kobotoolbox-vols-kobocatmedia"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-kpimedia"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-mongo"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-redismaindata"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-static-kobocat"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-static-kpi"
+    storageCapacity: "100Mi"
+  - name: "kobotoolbox-vols-static-whoosh"
+    storageCapacity: "100Mi"
