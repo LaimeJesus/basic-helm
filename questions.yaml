@@ -1,19 +1,2 @@
 categories:
 - Kobotoolbox
-questions: 
-# Volumes
-- variable: kobotoolbox-backups-mongo.hostPath
-  label: Host Path
-  description: Host Path de kobotoolbox-backups-mongo
-  group: Volumes
-  default: /var/lib/tmp/kobotoolbox-backups-mongo
-  required: true
-  type: string
-
-- variable: kobotoolbox-backups-mongo.storage
-  label: Storage
-  description: Storage de kobotoolbox-backups-mongo
-  group: Volumes
-  default: 100Mi
-  required: true
-  type: string
