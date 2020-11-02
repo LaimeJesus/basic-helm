@@ -345,7 +345,7 @@ deployments:
         command: ['sh', '-c', "until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for postgres; sleep 2; done"]
       - name: init-kpi
         image: busybox:1.28
-        command: ['sh', '-c', "i=1; while [ $(wget --timeout 2 --spider --server-response kpi:8000 2>&1 | grep '200\ OK' | wc -l) -eq 0 ]; do echo waiting kpi $i seconds...; sleep $i; i=$(($i+2)); done"]
+        command: ['sh', '-c', "until nslookup kpi.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for kpi; sleep 5; done"]
     mounts:
       - mountPath: /srv/static
         name: kobotoolbox-vols-static-kobocat
