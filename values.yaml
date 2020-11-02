@@ -1,9 +1,9 @@
-# Default values for basic-test.
+# Default values for kobotoolbox.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-nameOverride: "basic-test-app"
-fullnameOverride: "basic-test"
+nameOverride: "kobotoolbox-app"
+fullnameOverride: "kobotoolbox"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -12,7 +12,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "basic-user"
+  name: "kobotoolbox-user"
 
 pullSecrets:
   - name: dockerhub
@@ -224,6 +224,10 @@ deployments:
   - name: kpi
     image: scanterra/kobotoolbox_kpi:develop
     imagePullPolicy: Always
+    initContainers:
+      - name: init-postgres
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for postgres; sleep 2; done"]
     mounts:
       - mountPath: /srv/static
         name: kobotoolbox-vols-static-kpi
@@ -335,6 +339,13 @@ deployments:
   - name: kobocat
     image: scanterra/kobotoolbox_kobocat:2.018.31
     imagePullPolicy: Always
+    initContainers:
+      - name: init-postgres
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for postgres; sleep 2; done"]
+      - name: init-kpi
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup kpi.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for kpi; sleep 5; done"]
     mounts:
       - mountPath: /srv/static
         name: kobotoolbox-vols-static-kobocat
