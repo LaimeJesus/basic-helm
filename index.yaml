@@ -3,13 +3,13 @@ entries:
   basic-test:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-11-02T10:52:46.101052716-03:00"
+    created: "2020-11-02T15:12:52.432219447-03:00"
     description: A Helm chart for Kubernetes
-    digest: 3e71de013bf49752a2d9ba1a24d734073954ed157f29d52d7da7c977d003824d
+    digest: 305b9fdace96e60922ba7c2ba5aaa32eb8c697608761ababef021cbb450a089a
     icon: https://raw.githubusercontent.com/kobotoolbox/kobotoolbox.org/master/favicon.ico
     name: basic-test
     type: application
     urls:
-    - https://laimejesus.github.io/basic-test/basic-test-0.1.1.tgz
-    version: 0.1.1
-generated: "2020-11-02T10:52:46.089604272-03:00"
+    - https://laimejesus.github.io/basic-test/basic-test-0.1.2.tgz
+    version: 0.1.2
+generated: "2020-11-02T15:12:52.403727428-03:00"
