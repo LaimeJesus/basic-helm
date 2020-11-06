@@ -13,7 +13,7 @@ questions:
     label: Enable deploy Postgres
     type: string
     group: Deploy
-    show_subquestion_if: deployments.postgres.deploy=true
+    show_subquestion_if: true
     subquestions:
       - variable: deployments.postgres.image
         label: Postgres Image
@@ -24,7 +24,7 @@ questions:
     label: Enable deploy Mongo
     type: string
     group: Deploy
-    show_subquestion_if: deployments.mongo.deploy=true
+    show_subquestion_if: true
     subquestions:
       - variable: deployments.mongo.image
         label: Mongo Image
@@ -35,7 +35,7 @@ questions:
     label: Enable deploy Rabbit
     type: string
     group: Deploy
-    show_subquestion_if: deployments.rabbit.deploy=true
+    show_subquestion_if: true
     subquestions:
       - variable: deployments.rabbit.image
         label: Rabbit Image
@@ -46,7 +46,7 @@ questions:
     label: Enable deploy Redis Cache
     type: string
     group: Deploy
-    show_subquestion_if: deployments.redis-cache.deploy=true
+    show_subquestion_if: true
     subquestions:
       - variable: deployments.redis-cache.image
         label: Redis Cache Image
@@ -57,7 +57,7 @@ questions:
     label: Enable deploy Redis Main
     type: string
     group: Deploy
-    show_subquestion_if: deployments.redis-main.deploy=true
+    show_subquestion_if: true
     subquestions:
       - variable: deployments.redis-main.image
         label: Redis Main Image
