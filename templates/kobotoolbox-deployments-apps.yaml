@@ -1,0 +1,211 @@
+{{ range $idx, $service := .Values.apps }}
+{{- if $service.deploy }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: {{ $idx }}
+  name: {{ $idx }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: {{ $idx }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: {{ $idx }}
+    spec:
+      {{- if not (empty $service.initContainers) }}
+      initContainers:
+        {{- with $service.initContainers }}
+          {{- toYaml . | trim | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      containers:
+      - name: {{ $idx }}
+        image: {{ $service.image }}
+        imagePullPolicy: {{ $.Values.imagePullPolicy }}
+        env:
+          # kobo user settings
+          - name: KOBO_SUPERUSER_USERNAME
+            value: {{ $.Values.KOBO_SUPERUSER_USERNAME }}
+          - name: KOBO_SUPERUSER_PASSWORD
+            value: {{ $.Values.KOBO_SUPERUSER_PASSWORD }}
+          - name: KOBO_SUPPORT_EMAIL
+            value: {{ $.Values.KOBO_SUPPORT_EMAIL }}
+          {{- if eq ($.Values.KOBOTOOLBOX_PROTOCOL | quote) "http" }}
+          - name: HOST_ADDRESS
+            value: {{ $.Values.PUBLIC_DOMAIN_NAME }}
+          - name: KPI_PUBLIC_PORT
+            value: 9000
+          - name: KOBOCAT_PUBLIC_PORT
+            value: 9001
+          - name: ENKETO_EXPRESS_PUBLIC_PORT
+            value: 9005
+          {{- end }}
+          {{- if eq ($.Values.KOBOTOOLBOX_PROTOCOL | quote) "https" }}
+          - name: PUBLIC_DOMAIN_NAME
+            value: {{ $.Values.PUBLIC_DOMAIN_NAME }}
+          - name: KOBOFORM_PUBLIC_SUBDOMAIN
+            value: {{ $.Values.KOBOFORM_PUBLIC_SUBDOMAIN }}
+          - name: KOBOCAT_PUBLIC_SUBDOMAIN
+            value: {{ $.Values.KOBOCAT_PUBLIC_SUBDOMAIN }}
+          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
+            value: {{ $.Values.ENKETO_EXPRESS_PUBLIC_SUBDOMAIN }}
+          {{- end }}
+          {{- if eq $.Values.USE_ENV_VAR true }}
+          - name: USE_ENV_VAR
+            value: {{ $.Values.USE_ENV_VAR }}
+          - name: KOBOFORM_URL
+            value: {{ $.Values.KOBOTOOLBOX_PROTOCOL }}://{{ $.Values.KOBOFORM_SERVER_NAME }}
+          - name: KOBOCAT_URL
+            value: {{ $.Values.KOBOTOOLBOX_PROTOCOL }}://{{ $.Values.KOBOCAT_SERVER_NAME }}
+          - name: ENKETO_URL
+            value: {{ $.Values.KOBOTOOLBOX_PROTOCOL }}://{{ $.Values.ENKETO_SERVER_NAME }}
+          - name: CSRF_COOKIE_DOMAIN
+            value: {{ $.Values.CSRF_COOKIE_DOMAIN }}
+          - name: DJANGO_ALLOWED_HOSTS
+            value: {{ $.Values.DJANGO_ALLOWED_HOSTS }}
+          - name: KOBOFORM_SERVER_NAME
+            value: {{ $.Values.KOBOFORM_SERVER_NAME }}
+          - name: KOBOCAT_SERVER_NAME
+            value: {{ $.Values.KOBOCAT_SERVER_NAME }}
+          - name: ENKETO_SERVER_NAME
+            value: {{ $.Values.ENKETO_SERVER_NAME }}
+          {{- end }}
+          - value: TEMPLATE_DEBUG
+            value: False
+          # web server settings
+          - name: KPI_WEB_SERVER
+            value: {{ $.Values.PROXY_WEB_SERVER }}
+          - name: KOBOCAT_WEB_SERVER
+            value: {{ $.Values.PROXY_WEB_SERVER }}
+          - name: KOBOCAT_STATIC_FILES_SERVER
+            value: Nginx
+          - name: KPI_STATIC_FILES_SERVER
+            value: Nginx
+          - name: ENKETO_PROTOCOL
+            value: {{ $.Values.KOBOTOOLBOX_PROTOCOL }}
+          - name: ENKETO_VERSION
+            value: Express
+          - name: ENKETO_API_TOKEN
+            value: {{ $.Values.ENKETO_API_TOKEN }}
+          - name: DJANGO_SECRET_KEY
+            value: {{ $.Values.DJANGO_SECRET_KEY }}
+          # email settings
+          - name: EMAIL_BACKEND
+            value: django.core.mail.backends.smtp.EmailBackend
+          {{- if eq $.Values.USE_EXTERNAL_SMTP true }}
+          - name: EMAIL_HOST
+            value: {{ $.Values.EMAIL_HOST }}
+          - name: EMAIL_PORT
+            value: {{ $.Values.EMAIL_PORT }}
+          - name: EMAIL_HOST_USER
+            value: {{ $.Values.EMAIL_HOST_USER }}
+          - name: EMAIL_HOST_PASSWORD
+            value: {{ $.Values.EMAIL_HOST_PASSWORD }}
+          - name: EMAIL_USE_TLS
+            value: {{ $.Values.EMAIL_USE_TLS }}
+          {{- end }}
+          - name: DEFAULT_FROM_EMAIL
+            value: {{ $.Values.KOBO_SUPPORT_EMAIL }}
+
+          # celery
+          - name: CELERYD_TASK_TIME_LIMIT
+            value: {{ $.Values.TASK_TIMEOUT }}
+          - name: CELERYD_TASK_SOFT_TIME_LIMIT
+            value: {{ $.Values.TASK_SOFT_TIMEOUT }}
+
+          # kobocat
+          {{- if eq $idx "kobocat" }}
+          - name: POSTGRES_BACKUP_SCHEDULE
+            value: {{ $.Values.POSTGRES_BACKUP_SCHEDULE }}
+          - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
+            value: {{ $.Values.POSTGRES_BACKUP_ARCHIVE_FILENAME }}
+          - name: MONGO_BACKUP_SCHEDULE
+            value: {{ $.Values.MONGO_BACKUP_SCHEDULE }}
+          - name: MONGO_BACKUP_ARCHIVE_FILENAME
+            value: {{ $.Values.MONGO_BACKUP_ARCHIVE_FILENAME }}
+          - name: KOBOCAT_MEDIA_BACKUP_SCHEDULE
+            value: {{ $.Values.KOBOCAT_MEDIA_BACKUP_SCHEDULE }}
+          {{- if eq $.Values.USE_CUSTOM_KOBOCAT true }}
+          - name: DJANGO_SETTINGS_MODULE
+            value: {{ $.Values.CUSTOM_KOBOCAT_DJANGO_SETTINGS_MODULE }}
+          - name: CUSTOM_KOBOCAT_THEME_APP_PIP_URL
+            value: {{ $.Values.CUSTOM_KOBOCAT_THEME_APP_PIP_URL }}
+          - name: PYTHONPATH
+            value: {{ $.Values.CUSTOM_KOBOCAT_PYTHONPATH }}
+          - name: CUSTOM_KOBOCAT_THEME_DEPLOY_KEY
+            value: {{ $.Values.CUSTOM_KOBOCAT_THEME_DEPLOY_KEY }}
+          {{- else }}
+          - name: DJANGO_SETTINGS_MODULE
+            value: onadata.settings.kc_environ
+          {{- end }}
+          - name: KOBOCAT_DJANGO_DEBUG
+            value: {{ $.Values.KOBOCAT_DJANGO_DEBUG }}
+          - name: DATABASE_URL
+            value: postgis://{{ $.Values.POSTGRES_USER }}:{{ $.Values.POSTGRES_PASSWORD }}@postgres:{{ $.Values.POSTGRES_PORT }}/{{ $.Values.POSTGRES_DBNAME }}
+          - name: KOBO_POSTGRES_DB_NAME
+            value: {{ $.Values.POSTGRES_DBNAME }}
+          - name: KOBO_POSTGRES_USER
+            value: {{ $.Values.POSTGRES_USER }}
+          - name: KOBOCAT_BROKER_URL
+            value: {{ $.Values.KOBOCAT_BROKER_URL }}
+          {{- end }}
+
+          # kpi
+          {{- if eq $idx "kpi" }}
+          - name: KPI_DJANGO_DEBUG
+            value: {{ $.Values.KPI_DJANGO_DEBUG }}
+          - name: KPI_PREFIX
+            value: {{ $.Values.KPI_PREFIX }}
+          - name: KPI_BROKER_URL
+            value: {{ $.Values.KPI_BROKER_URL }}
+          - name: DATABASE_URL
+            value: postgres://{{ $.Values.POSTGRES_USER }}:{{ $.Values.POSTGRES_PASSWORD }}@postgres:{{ $.Values.POSTGRES_PORT }}/{{ $.Values.POSTGRES_DBNAME }}
+          - name: DJANGO_LANGUAGE_CODES
+            value: {{ $.Values.DJANGO_LANGUAGE_CODES }}
+          {{- if eq $.Values.KOBOTOOLBOX_PROTOCOL "https" }}
+          - name: SECURE_PROXY_SSL_HEADER
+            value: HTTP_X_FORWARDED_PROTO, {{ $.Values.KOBOTOOLBOX_PROTOCOL }}
+          {{- end }}
+          {{- end }}
+
+          # nginx
+          {{- if eq $idx "nginx" }}
+          - name: NGINX_CONFIG_FILE_NAME
+            value: nginx_site_http.conf
+          - name: TEMPLATED_VAR_REFS
+            value: $${{ $.Values.PUBLIC_DOMAIN_NAME }} $${{ $.Values.KOBOFORM_PUBLIC_SUBDOMAIN }} $${{ $.Values.KOBOCAT_PUBLIC_SUBDOMAIN }} $${{ $.Values.ENKETO_EXPRESS_PUBLIC_SUBDOMAIN }}
+          {{- end }}
+
+        {{- if not (empty $service.volumes) }}
+        volumeMounts:
+          {{- with $service.volumes }}
+            {{- range $idx, $val := .}}
+          - mountPath: {{ $val }}
+            name: {{ $idx }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+      imagePullSecrets:
+        - name: {{ $.Values.imagePullSecrets }}
+      restartPolicy: {{ $.Values.restartPolicy }}
+      serviceAccountName: ""
+      {{- if not (empty $service.volumes) }}
+      volumes:
+        {{- with $service.volumes }}
+            {{- range $idx, $val := .}}
+        - name: {{ $idx }}
+          persistentVolumeClaim:
+            claimName: {{ $idx }}
+            {{- end }}
+        {{- end }}
+      {{- end }}
+status: {}
+{{ end }}
+{{ end }}

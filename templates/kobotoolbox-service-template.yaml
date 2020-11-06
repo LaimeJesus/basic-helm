@@ -1,0 +1,22 @@
+{{ range $idx, $service := (merge .Values.services .Values.apps) }}
+{{- if and (not (empty $service.ports)) $service.deploy }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: {{ $idx }}
+  name: {{ $idx }}
+spec:
+  selector:
+    io.kompose.service: {{ $idx }}
+  ports:
+    {{- with $service.ports }}
+      {{- range $idx, $val := .}}
+    - name: {{ $idx }}
+      port: {{ $val }}
+      targetPort: {{ $val }}
+      {{- end }}
+    {{- end }}
+{{- end }}
+{{ end }}
