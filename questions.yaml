@@ -8,60 +8,205 @@ questions:
     group: Required
 
   # deploys
-  - variable: deployments.postgres.deploy
+  - variable: apps.kpi.deploy
+    default: true
+    label: Enable deploy Kpi
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: apps.kpi.image
+        label: Kpi Image
+        default: scanterra/kobotoolbox_kpi:develop
+        type: string
+  - variable: apps.kobocat.deploy
+    default: true
+    label: Enable deploy Kobocat
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: apps.kobocat.image
+        label: Kobocat Image
+        default: scanterra/kobotoolbox_kobocat:2.018.31
+        type: string
+  - variable: apps.enketo-express.deploy
+    default: true
+    label: Enable deploy Enketo Express
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: apps.enketo-express.image
+        label: Enketo Express Image
+        default: scanterra/kobotoolbox_enketo_express:k8-deploy
+        type: string
+  - variable: apps.nginx.deploy
+    default: true
+    label: Enable deploy Nginx
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: apps.nginx.image
+        label: Nginx Image
+        default: scanterra/kobotoolbox_nginx:k8-deploy
+        type: string
+
+  - variable: services.postgres.deploy
     default: true
     label: Enable deploy Postgres
     type: string
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.postgres.image
+      - variable: services.postgres.image
         label: Postgres Image
         default: scanterra/postgis:9.6-2.4
         type: string
-  - variable: deployments.mongo.deploy
+  - variable: services.mongo.deploy
     default: true
     label: Enable deploy Mongo
     type: string
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.mongo.image
+      - variable: services.mongo.image
         label: Mongo Image
         default: scanterra/kobotoolbox_mongo:latest
         type: string
-  - variable: deployments.rabbit.deploy
+  - variable: services.rabbit.deploy
     default: true
     label: Enable deploy Rabbit
     type: string
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.rabbit.image
+      - variable: services.rabbit.image
         label: Rabbit Image
         default: scanterra/kobotoolbox_rabbit:latest
         type: string
-  - variable: deployments.redis-cache.deploy
+  - variable: services.redis-cache.deploy
     default: true
     label: Enable deploy Redis Cache
     type: string
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.redis-cache.image
+      - variable: services.redis-cache.image
         label: Redis Cache Image
         default: scanterra/kobotoolbox_redis_cache:2.6
         type: string
-  - variable: deployments.redis-main.deploy
+  - variable: services.redis-main.deploy
     default: true
     label: Enable deploy Redis Main
     type: string
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.redis-main.image
+      - variable: services.redis-main.image
         label: Redis Main Image
         default: scanterra/kobotoolbox_redis_main:2.6
+        type: string
+  - variable: services.redis-cache.deploy
+    default: true
+    label: Enable deploy Redis Cache
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.redis-cache.image
+        label: Redis Cache Image
+        default: scanterra/kobotoolbox_redis_cache:2.6
+        type: string
+
+  - variable: services.db-backup.deploy
+    default: true
+    label: Enable deploy Db Backup
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.db-backup.image
+        label: Db Backup Image
+        default: scanterra/pg-backup:9.6
+        type: string
+  - variable: services.mongo-btsync.deploy
+    default: true
+    label: Enable deploy Mongo Btsync
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.mongo-btsync.image
+        label: Mongo Btsync Image
+        default: scanterra/btsync:rancher
+        type: string
+  - variable: services.kobocat-btsync.deploy
+    default: true
+    label: Enable deploy Kobocat Btsync
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.kobocat-btsync.image
+        label: Kobocat Btsync Image
+        default: scanterra/btsync:rancher
+        type: string
+  - variable: services.kobo-postgres-btsync.deploy
+    default: true
+    label: Enable deploy Kobo Postgres Btsync
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.kobo-postgres-btsync.image
+        label: Kobo Postgres Btsync Image
+        default: scanterra/btsync:rancher
+        type: string
+  - variable: services.smtp.deploy
+    default: true
+    label: Enable deploy Smtp
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.smtp.image
+        label: Smtp Image
+        default: catatnight/postfix
+        type: string
+  - variable: services.smtp.deploy
+    default: true
+    label: Enable deploy Smtp
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.smtp.image
+        label: Smtp Image
+        default: lucernae/borgbackup:1.1.8
+        type: string
+  - variable: services.borg-backup-service.deploy
+    default: true
+    label: Enable deploy Borg Backup Service
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.borg-backup-service.image
+        label: Borg Backup Service Image
+        default: lucernae/borgbackup:1.1.8
+        type: string
+  - variable: services.borg-backup-service-server.deploy
+    default: true
+    label: Enable deploy Borg Backup Service Server
+    type: string
+    group: Deploy
+    show_subquestion_if: true
+    subquestions:
+      - variable: services.borg-backup-service-server.image
+        label: Borg Backup Service Server Image
+        default: lucernae/borgbackup:1.1.8
         type: string
 
   - variable: ENKETO_API_TOKEN
