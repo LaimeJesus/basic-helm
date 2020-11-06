@@ -19,9 +19,9 @@ spec:
       labels:
         io.kompose.service: {{ $idx }}
     spec:
-      {{- if not (empty .initContainers) }}
+      {{- if not (empty $service.initContainers) }}
       initContainers:
-        {{- with .initContainers }}
+        {{- with $service.initContainers }}
           {{- toYaml . | trim | nindent 8 }}
         {{- end }}
       {{- end }}

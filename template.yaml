@@ -1,5 +1,5 @@
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -13,7 +13,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -27,7 +27,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -41,7 +41,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -55,7 +55,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -69,7 +69,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -83,7 +83,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -97,7 +97,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -111,7 +111,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -125,7 +125,7 @@ spec:
     requests:
       storage: 1Gi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -139,7 +139,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -153,7 +153,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -167,7 +167,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -181,7 +181,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -195,7 +195,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -209,7 +209,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/volume-claims/kobotoolbox-persistentvolumeclaim-template.yaml
+# Source: basic-test/templates/kobotoolbox-persistentvolumeclaim-template.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -223,145 +223,7 @@ spec:
     requests:
       storage: 100Mi
 ---
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: db-backup
-  name: db-backup
-spec:
-  selector:
-    io.kompose.service: db-backup
-  ports:
-    - name: "5432"
-      port: 5432
-      targetPort: 5432
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: mongo-btsync
-  name: mongo-btsync
-spec:
-  selector:
-    io.kompose.service: mongo-btsync
-  ports:
-    - name: "55555"
-      port: 55555
-      targetPort: 55555
-    - name: "8888"
-      port: 8888
-      targetPort: 8888
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: mongo
-  name: mongo
-spec:
-  selector:
-    io.kompose.service: mongo
-  ports:
-    - name: "27017"
-      port: 27017
-      targetPort: 27017
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: postgres
-  name: postgres
-spec:
-  selector:
-    io.kompose.service: postgres
-  ports:
-    - name: "5432"
-      port: 5432
-      targetPort: 5432
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: rabbit
-  name: rabbit
-spec:
-  selector:
-    io.kompose.service: rabbit
-  ports:
-    - name: "5672"
-      port: 5672
-      targetPort: 5672
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: redis-cache
-  name: redis-cache
-spec:
-  selector:
-    io.kompose.service: redis-cache
-  ports:
-    - name: "6379"
-      port: 6379
-      targetPort: 6379
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: redis-main
-  name: redis-main
-spec:
-  selector:
-    io.kompose.service: redis-main
-  ports:
-    - name: "6379"
-      port: 6379
-      targetPort: 6379
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: kpi
-  name: kpi
-spec:
-  selector:
-    io.kompose.service: kpi
-  ports:
-    - name: "8000"
-      port: 8000
-      targetPort: 8000
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    io.kompose.service: kobocat
-  name: kobocat
-spec:
-  selector:
-    io.kompose.service: kobocat
-  ports:
-    - name: "8000"
-      port: 8000
-      targetPort: 8000
----
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -372,11 +234,56 @@ spec:
   selector:
     io.kompose.service: enketo-express
   ports:
-    - name: "8005"
+    - name: default
       port: 8005
       targetPort: 8005
 ---
-# Source: basic-test/templates/services/kobotoolbox-service-template.yaml
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: kobocat
+  name: kobocat
+spec:
+  selector:
+    io.kompose.service: kobocat
+  ports:
+    - name: default
+      port: 8000
+      targetPort: 8000
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: kpi
+  name: kpi
+spec:
+  selector:
+    io.kompose.service: kpi
+  ports:
+    - name: default
+      port: 8000
+      targetPort: 8000
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: mongo
+  name: mongo
+spec:
+  selector:
+    io.kompose.service: mongo
+  ports:
+    - name: default
+      port: 27017
+      targetPort: 27017
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -387,14 +294,221 @@ spec:
   selector:
     io.kompose.service: nginx
   ports:
-    - name: "80"
-      port: 80
-      targetPort: 80
-    - name: "443"
-      port: 443
-      targetPort: 443
+    - name: enketo-express
+      port: 9005
+      targetPort: 9005
+    - name: kobocat
+      port: 9001
+      targetPort: 9001
+    - name: kpi
+      port: 9000
+      targetPort: 9000
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  selector:
+    io.kompose.service: postgres
+  ports:
+    - name: default
+      port: 5432
+      targetPort: 5432
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: rabbit
+  name: rabbit
+spec:
+  selector:
+    io.kompose.service: rabbit
+  ports:
+    - name: default
+      port: 5672
+      targetPort: 5672
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: redis-cache
+  name: redis-cache
+spec:
+  selector:
+    io.kompose.service: redis-cache
+  ports:
+    - name: default
+      port: 6379
+      targetPort: 6379
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: redis-main
+  name: redis-main
+spec:
+  selector:
+    io.kompose.service: redis-main
+  ports:
+    - name: default
+      port: 6379
+      targetPort: 6379
+---
+# Source: basic-test/templates/kobotoolbox-service-template.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: smtp
+  name: smtp
+spec:
+  selector:
+    io.kompose.service: smtp
+  ports:
+    - name: default
+      port: 25
+      targetPort: 25
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: borg-backup-service
+  name: borg-backup-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: borg-backup-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: borg-backup-service
+    spec:
+      containers:
+      - name: borg-backup-service
+        image: lucernae/borgbackup:1.1.8
+        imagePullPolicy: Always
+        env:
+          - name: ARCHIVE_PREFIX
+            value: kobotoolbox
+          - name: BACKUP_FROM
+            value: /borg/data
+          - name: BACKUP_WHAT
+            value: .
+          - name: BORG_PASSPHRASE
+            value: kobotoolboxincrementalbackup
+          - name: BORG_REPO
+            value: /borg/repo
+          - name: COMPRESSION
+            value: lz4
+          - name: KEEP_DAILY
+            value: "7"
+          - name: KEEP_MONTHLY
+            value: "12"
+          - name: KEEP_WEEKLY
+            value: "4"
+          - name: KEEP_YEARLY
+            value: "1"
+          - name: PRUNE
+            value: "1"                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: borg-backup-service-server
+  name: borg-backup-service-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: borg-backup-service-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: borg-backup-service-server
+    spec:
+      containers:
+      - name: borg-backup-service-server
+        image: lucernae/borgbackup:1.1.8
+        imagePullPolicy: Always
+        env:
+          - name: ARCHIVE_PREFIX
+            value: kobotoolbox
+          - name: BORG_PASSPHRASE
+            value: kobotoolboxincrementalbackup
+          - name: BORG_RELOCATED_REPO_ACCESS_IS_OK
+            value: "yes"
+          - name: BORG_REPO
+            value: /borg/repo
+          - name: USERS
+            value: root
+        volumeMounts:
+          - mountPath: /borg/data/rawbackups/mongo
+            name: kobotoolbox-backups-mongo
+          - mountPath: /borg/data/rawbackups/postgres
+            name: kobotoolbox-backups-postgres
+          - mountPath: /root/.cache/borg
+            name: kobotoolbox-borg-cache
+          - mountPath: /borg/repo
+            name: kobotoolbox-borg-repo
+          - mountPath: /root
+            name: kobotoolbox-borg-users-home
+          - mountPath: /borg/data/kobocatmedia
+            name: kobotoolbox-vols-kobocatmedia
+          - mountPath: /borg/data/kpimedia
+            name: kobotoolbox-vols-kpimedia                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-mongo
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-mongo
+        - name: kobotoolbox-backups-postgres
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-postgres
+        - name: kobotoolbox-borg-cache
+          persistentVolumeClaim:
+            claimName: kobotoolbox-borg-cache
+        - name: kobotoolbox-borg-repo
+          persistentVolumeClaim:
+            claimName: kobotoolbox-borg-repo
+        - name: kobotoolbox-borg-users-home
+          persistentVolumeClaim:
+            claimName: kobotoolbox-borg-users-home
+        - name: kobotoolbox-vols-kobocatmedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kobocatmedia
+        - name: kobotoolbox-vols-kpimedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kpimedia
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -423,21 +537,21 @@ spec:
           - name: DUMPPREFIX
             value: postgres_backup
           - name: PGHOST
-            value: postgres
+            value: 
           - name: PGPASSWORD
-            value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
+            value: j3cA6eCIneo5nU5qjK8yXycalu9B2I41
           - name: PGPORT
-            value: "5432"
+            value: 
           - name: PGUSER
             value: kobo_superadmin
           - name: POSTGRES_DBNAME
             value: kobotoolbox
           - name: POSTGRES_HOST
-            value: postgres
+            value: 
           - name: POSTGRES_PASSWORD
-            value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
+            value: j3cA6eCIneo5nU5qjK8yXycalu9B2I41
           - name: POSTGRES_PORT
-            value: "5432"
+            value: 
           - name: POSTGRES_USER
             value: kobo_superadmin
           - name: WITH_POSTGIS
@@ -455,233 +569,37 @@ spec:
             claimName: kobotoolbox-backups-postgres
 status: {}
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: mongo-btsync
-  name: mongo-btsync
+    io.kompose.service: enketo-express
+  name: enketo-express
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: mongo-btsync
+      io.kompose.service: enketo-express
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.service: mongo-btsync
+        io.kompose.service: enketo-express
     spec:
       containers:
-      - name: mongo-btsync
-        image: scanterra/btsync:rancher
+      - name: enketo-express
+        image: scanterra/kobotoolbox_enketo_express:k8-deploy
         imagePullPolicy: Always
-        env:
-          - name: DEVICE
-            value: ScanTerra Production - Mongo
-          - name: SECRET
-            value: ATCAWOQEHQJIGF6SLXUBL3BE6D2ZP3JF7
-          - name: STANDBY_MODE
-            value: "TRUE"
-        volumeMounts:
-          - mountPath: /web
-            name: kobotoolbox-backups-mongo                
+        env:                
       imagePullSecrets:
         - name: dockerhub
       restartPolicy: Always
       serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-backups-mongo
-          persistentVolumeClaim:
-            claimName: kobotoolbox-backups-mongo
 status: {}
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: mongo
-  name: mongo
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: mongo
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: mongo
-    spec:
-      containers:
-      - name: mongo
-        image: scanterra/kobotoolbox_mongo:latest
-        imagePullPolicy: Always
-        env:
-          - name: CSRF_COOKIE_DOMAIN
-            value: .scanterra.com
-          - name: DJANGO_ALLOWED_HOSTS
-            value: .scanterra.com
-          - name: DJANGO_SECRET_KEY
-            value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
-          - name: ENKETO_API_TOKEN
-            value: enketoapitoken
-          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form
-          - name: ENKETO_SERVER_NAME
-            value: local.scancollect-form.scanterra.com
-          - name: ENKETO_URL
-            value: https://local.scancollect-form.scanterra.com
-          - name: KOBOCAT_MEDIA_BACKUP_SCHEDULE
-            value: '#0 0 * * 0'
-          - name: KOBOCAT_PUBLIC_SUBDOMAIN
-            value: local.scancollect
-          - name: KOBOCAT_SERVER_NAME
-            value: local.scancollect.scanterra.com
-          - name: KOBOCAT_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOFORM_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form-edit
-          - name: KOBOFORM_SERVER_NAME
-            value: local.scancollect-form-edit.scanterra.com
-          - name: KOBOFORM_URL
-            value: https://local.scancollect-form-edit.scanterra.com
-          - name: KOBO_SUPERUSER_PASSWORD
-            value: HsBUDwh6#JwVpBR@VILU
-          - name: KOBO_SUPERUSER_USERNAME
-            value: kobo_superadmin
-          - name: KOBO_SUPPORT_EMAIL
-            value: soporte@scanterra.com
-          - name: MONGO_BACKUP_ARCHIVE_FILENAME
-            value: mongo_backup.mongorestore.tar.gz
-          - name: MONGO_BACKUP_SCHEDULE
-            value: 0 1 * * *
-          - name: MONGO_DATA
-            value: /srv/db
-          - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
-            value: postgres_backup_kobotoolbox.pg_restore
-          - name: POSTGRES_BACKUP_SCHEDULE
-            value: '#0 2 * * 0'
-          - name: PUBLIC_DOMAIN_NAME
-            value: local.scanterra.com
-          - name: USE_ENV_VAR
-            value: "true"
-        volumeMounts:
-          - mountPath: /srv/db
-            name: kobotoolbox-vols-mongo
-          - mountPath: /srv/backups
-            name: kobotoolbox-backups-mongo                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-vols-mongo
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-mongo
-        - name: kobotoolbox-backups-mongo
-          persistentVolumeClaim:
-            claimName: kobotoolbox-backups-mongo
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: postgres
-  name: postgres
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: postgres
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: postgres
-    spec:
-      containers:
-      - name: postgres
-        image: scanterra/postgis:9.6-2.4
-        imagePullPolicy: Always
-        env:
-          - name: ALLOW_IP_RANGE
-            value: 0.0.0.0/0
-          - name: POSTGRES_DBNAME
-            value: kobotoolbox
-          - name: POSTGRES_PASSWORD
-            value: j3cA6eCIneo5nU5qjK8yXycaIu9B2l41
-          - name: POSTGRES_USER
-            value: kobo_superadmin
-        volumeMounts:
-          - mountPath: /var/lib/postgresql
-            name: kobotoolbox-vols-db
-          - mountPath: /srv/backups
-            name: kobotoolbox-backups-postgres                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-vols-db
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-db
-        - name: kobotoolbox-backups-postgres
-          persistentVolumeClaim:
-            claimName: kobotoolbox-backups-postgres
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: kobocat-btsync
-  name: kobocat-btsync
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: kobocat-btsync
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: kobocat-btsync
-    spec:
-      containers:
-      - name: kobocat-btsync
-        image: scanterra/btsync:rancher
-        imagePullPolicy: Always
-        env:
-          - name: DEVICE
-            value: ScanTerra Production - Kobocat
-          - name: SECRET
-            value: AW2VPXUMLCCPRRT6K53WEOUHT2HZCPVL3
-          - name: STANDBY_MODE
-            value: "TRUE"
-        volumeMounts:
-          - mountPath: /web
-            name: kobotoolbox-backups-kobocat                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-backups-kobocat
-          persistentVolumeClaim:
-            claimName: kobotoolbox-backups-kobocat
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -705,12 +623,6 @@ spec:
         image: scanterra/btsync:rancher
         imagePullPolicy: Always
         env:
-          - name: DEVICE
-            value: ScanTerra Production - Kobo Postgres
-          - name: SECRET
-            value: APWDOMOXQCE74MVVJJFDWXD5YFMDS4VNC
-          - name: STANDBY_MODE
-            value: "TRUE"
         volumeMounts:
           - mountPath: /web
             name: kobotoolbox-backups-postgres                
@@ -724,256 +636,7 @@ spec:
             claimName: kobotoolbox-backups-postgres
 status: {}
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: rabbit
-  name: rabbit
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: rabbit
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: rabbit
-    spec:
-      containers:
-      - name: rabbit
-        image: scanterra/kobotoolbox_rabbit:latest
-        imagePullPolicy: Always
-        env:
-          - name: RABBITMQ_LOG_BASE
-            value: /var/log/rabbitmq
-        volumeMounts:
-          - mountPath: /var/log/rabbitmq
-            name: kobotoolbox-log-rabbitmq                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-log-rabbitmq
-          persistentVolumeClaim:
-            claimName: kobotoolbox-log-rabbitmq
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: redis-cache
-  name: redis-cache
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: redis-cache
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: redis-cache
-    spec:
-      containers:
-      - name: redis-cache
-        image: scanterra/kobotoolbox_redis_cache:2.6
-        imagePullPolicy: Always                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: redis-main
-  name: redis-main
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: redis-main
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: redis-main
-    spec:
-      containers:
-      - name: redis-main
-        image: scanterra/kobotoolbox_redis_main:2.6
-        imagePullPolicy: Always
-        volumeMounts:
-          - mountPath: /data/
-            name: kobotoolbox-vols-redismaindata                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-vols-redismaindata
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-redismaindata
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    io.kompose.service: kpi
-  name: kpi
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      io.kompose.service: kpi
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        io.kompose.service: kpi
-    spec:
-      initContainers:
-        - command:
-          - sh
-          - -c
-          - until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
-            do echo waiting for postgres; sleep 2; done
-          image: busybox:1.28
-          name: init-postgres
-      containers:
-      - name: kpi
-        image: scanterra/kobotoolbox_kpi:develop
-        imagePullPolicy: Always
-        env:
-          - name: CELERYD_TASK_SOFT_TIME_LIMIT
-            value: "7200"
-          - name: CELERYD_TASK_TIME_LIMIT
-            value: "9000"
-          - name: CSRF_COOKIE_DOMAIN
-            value: .scanterra.com
-          - name: DATABASE_URL
-            value: postgres://kobo_superadmin:j3cA6eCIneo5nU5qjK8yXycaIu9B2l41@postgres:5432/kobotoolbox
-          - name: DEFAULT_FROM_EMAIL
-            value: soporte@scanterra.com
-          - name: DJANGO_ALLOWED_HOSTS
-            value: .scanterra.com
-          - name: DJANGO_LANGUAGE_CODES
-            value: en fr es ar zh-hans hi ku
-          - name: DJANGO_SECRET_KEY
-            value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
-          - name: EMAIL_BACKEND
-            value: django.core.mail.backends.smtp.EmailBackend
-          - name: EMAIL_HOST
-            value: smtp
-          - name: EMAIL_HOST_PASSWORD
-            value: docker
-          - name: EMAIL_HOST_USER
-            value: noreply
-          - name: EMAIL_PORT
-            value: "25"
-          - name: EMAIL_USE_TLS
-            value: "False"
-          - name: ENKETO_API_TOKEN
-            value: enketoapitoken
-          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form
-          - name: ENKETO_SERVER_NAME
-            value: local.scancollect-form.scanterra.com
-          - name: ENKETO_URL
-            value: https://local.scancollect-form.scanterra.com
-          - name: ENKETO_VERSION
-            value: Express
-          - name: KOBOCAT_INTERNAL_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOCAT_PUBLIC_SUBDOMAIN
-            value: local.scancollect
-          - name: KOBOCAT_SERVER_NAME
-            value: local.scancollect.scanterra.com
-          - name: KOBOCAT_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KOBOCAT_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOCAT_WEB_SERVER
-            value: uWSGI
-          - name: KOBOFORM_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form-edit
-          - name: KOBOFORM_SERVER_NAME
-            value: local.scancollect-form-edit.scanterra.com
-          - name: KOBOFORM_URL
-            value: https://local.scancollect-form-edit.scanterra.com
-          - name: KOBO_SUPERUSER_PASSWORD
-            value: HsBUDwh6#JwVpBR@VILU
-          - name: KOBO_SUPERUSER_USERNAME
-            value: kobo_superadmin
-          - name: KOBO_SUPPORT_EMAIL
-            value: soporte@scanterra.com
-          - name: KPI_BROKER_URL
-            value: amqp://kpi:kpi@rabbit:5672/kpi
-          - name: KPI_DJANGO_DEBUG
-            value: "False"
-          - name: KPI_PREFIX
-            value: /
-          - name: KPI_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KPI_WEB_SERVER
-            value: uWSGI
-          - name: PUBLIC_DOMAIN_NAME
-            value: local.scanterra.com
-          - name: SECURE_PROXY_SSL_HEADER
-            value: HTTP_X_FORWARDED_PROTO, https
-          - name: TEMPLATE_DEBUG
-            value: "False"
-          - name: USE_ENV_VAR
-            value: "true"
-        volumeMounts:
-          - mountPath: /srv/static
-            name: kobotoolbox-vols-static-kpi
-          - mountPath: /srv/src/kpi/media
-            name: kobotoolbox-vols-kpimedia
-          - mountPath: /srv/whoosh
-            name: kobotoolbox-vols-whoosh
-          - mountPath: /srv/logs
-            name: kobotoolbox-log-kpi
-          - mountPath: /srv/src/kobocat/media
-            name: kobotoolbox-vols-kobocatmedia                
-      imagePullSecrets:
-        - name: dockerhub
-      restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-        - name: kobotoolbox-vols-static-kpi
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-static-kpi
-        - name: kobotoolbox-vols-kpimedia
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-kpimedia
-        - name: kobotoolbox-vols-whoosh
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-whoosh
-        - name: kobotoolbox-log-kpi
-          persistentVolumeClaim:
-            claimName: kobotoolbox-log-kpi
-        - name: kobotoolbox-vols-kobocatmedia
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-kobocatmedia
-status: {}
----
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1012,203 +675,227 @@ spec:
         image: scanterra/kobotoolbox_kobocat:2.018.31
         imagePullPolicy: Always
         env:
-          - name: CELERYD_TASK_SOFT_TIME_LIMIT
-            value: "7200"
-          - name: CELERYD_TASK_TIME_LIMIT
-            value: "9000"
-          - name: CSRF_COOKIE_DOMAIN
-            value: .scanterra.com
-          - name: DATABASE_URL
-            value: postgis://kobo_superadmin:j3cA6eCIneo5nU5qjK8yXycaIu9B2l41@postgres:5432/kobotoolbox
-          - name: DEFAULT_FROM_EMAIL
-            value: soporte@scanterra.com
-          - name: DJANGO_ALLOWED_HOSTS
-            value: .scanterra.com
-          - name: DJANGO_SECRET_KEY
-            value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
-          - name: DJANGO_SETTINGS_MODULE
-            value: onadata.settings.kc_environ
-          - name: EMAIL_BACKEND
-            value: django.core.mail.backends.smtp.EmailBackend
-          - name: EMAIL_HOST
-            value: smtp
-          - name: EMAIL_HOST_PASSWORD
-            value: docker
-          - name: EMAIL_HOST_USER
-            value: noreply
-          - name: EMAIL_PORT
-            value: "25"
-          - name: EMAIL_USE_TLS
-            value: "False"
-          - name: ENKETO_API_TOKEN
-            value: enketoapitoken
-          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form
-          - name: ENKETO_PROTOCOL
-            value: https
-          - name: ENKETO_SERVER_NAME
-            value: local.scancollect-form.scanterra.com
-          - name: ENKETO_URL
-            value: https://local.scancollect-form.scanterra.com
-          - name: ENKETO_VERSION
-            value: Express
-          - name: KOBOCAT_BROKER_URL
-            value: amqp://kobocat:kobocat@rabbit:5672/kobocat
-          - name: KOBOCAT_DJANGO_DEBUG
-            value: "False"
-          - name: KOBOCAT_MEDIA_BACKUP_SCHEDULE
-            value: '#0 0 * * 0'
-          - name: KOBOCAT_PUBLIC_SUBDOMAIN
-            value: local.scancollect
-          - name: KOBOCAT_SERVER_NAME
-            value: local.scancollect.scanterra.com
-          - name: KOBOCAT_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KOBOCAT_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOCAT_WEB_SERVER
-            value: uWSGI
-          - name: KOBOFORM_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form-edit
-          - name: KOBOFORM_SERVER_NAME
-            value: local.scancollect-form-edit.scanterra.com
-          - name: KOBOFORM_URL
-            value: https://local.scancollect-form-edit.scanterra.com
-          - name: KOBO_POSTGRES_DB_NAME
-            value: kobotoolbox
-          - name: KOBO_POSTGRES_USER
-            value: kobo_superadmin
-          - name: KOBO_SUPERUSER_PASSWORD
-            value: HsBUDwh6#JwVpBR@VILU
-          - name: KOBO_SUPERUSER_USERNAME
-            value: kobo_superadmin
-          - name: KOBO_SUPPORT_EMAIL
-            value: soporte@scanterra.com
-          - name: KPI_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KPI_WEB_SERVER
-            value: uWSGI
-          - name: MONGO_BACKUP_ARCHIVE_FILENAME
-            value: mongo_backup.mongorestore.tar.gz
-          - name: MONGO_BACKUP_SCHEDULE
-            value: 0 1 * * *
-          - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
-            value: postgres_backup_kobotoolbox.pg_restore
-          - name: POSTGRES_BACKUP_SCHEDULE
-            value: '#0 2 * * 0'
-          - name: PUBLIC_DOMAIN_NAME
-            value: local.scanterra.com
-          - name: TEMPLATE_DEBUG
-            value: "False"
-          - name: USE_ENV_VAR
-            value: "true"
         volumeMounts:
-          - mountPath: /srv/static
-            name: kobotoolbox-vols-static-kobocat
-          - mountPath: /srv/src/kobocat/media
-            name: kobotoolbox-vols-kobocatmedia
           - mountPath: /srv/backups
             name: kobotoolbox-backups-kobocat
           - mountPath: /srv/logs
-            name: kobotoolbox-log-kobocat                
+            name: kobotoolbox-log-kobocat
+          - mountPath: /srv/src/kobocat/media
+            name: kobotoolbox-vols-kobocatmedia
+          - mountPath: /srv/static
+            name: kobotoolbox-vols-static-kobocat                
       imagePullSecrets:
         - name: dockerhub
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-        - name: kobotoolbox-vols-static-kobocat
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-static-kobocat
-        - name: kobotoolbox-vols-kobocatmedia
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-kobocatmedia
         - name: kobotoolbox-backups-kobocat
           persistentVolumeClaim:
             claimName: kobotoolbox-backups-kobocat
         - name: kobotoolbox-log-kobocat
           persistentVolumeClaim:
             claimName: kobotoolbox-log-kobocat
+        - name: kobotoolbox-vols-kobocatmedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kobocatmedia
+        - name: kobotoolbox-vols-static-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kobocat
 status: {}
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    io.kompose.service: enketo-express
-  name: enketo-express
+    io.kompose.service: kobocat-btsync
+  name: kobocat-btsync
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: enketo-express
+      io.kompose.service: kobocat-btsync
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        io.kompose.service: enketo-express
+        io.kompose.service: kobocat-btsync
     spec:
       containers:
-      - name: enketo-express
-        image: scanterra/kobotoolbox_enketo_express:k8-deploy
+      - name: kobocat-btsync
+        image: scanterra/btsync:rancher
         imagePullPolicy: Always
         env:
-          - name: CSRF_COOKIE_DOMAIN
-            value: .scanterra.com
-          - name: DJANGO_ALLOWED_HOSTS
-            value: .scanterra.com
-          - name: DJANGO_SECRET_KEY
-            value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
-          - name: ENKETO_API_TOKEN
-            value: enketoapitoken
-          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form
-          - name: ENKETO_SERVER_NAME
-            value: local.scancollect-form.scanterra.com
-          - name: ENKETO_URL
-            value: https://local.scancollect-form.scanterra.com
-          - name: KOBOCAT_PUBLIC_SUBDOMAIN
-            value: local.scancollect
-          - name: KOBOCAT_SERVER_NAME
-            value: local.scancollect.scanterra.com
-          - name: KOBOCAT_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOFORM_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form-edit
-          - name: KOBOFORM_SERVER_NAME
-            value: local.scancollect-form-edit.scanterra.com
-          - name: KOBOFORM_URL
-            value: https://local.scancollect-form-edit.scanterra.com
-          - name: KOBO_SUPERUSER_PASSWORD
-            value: HsBUDwh6#JwVpBR@VILU
-          - name: KOBO_SUPERUSER_USERNAME
-            value: kobo_superadmin
-          - name: KOBO_SUPPORT_EMAIL
-            value: soporte@scanterra.com
-          - name: PUBLIC_DOMAIN_NAME
-            value: local.scanterra.com
-          - name: USE_ENV_VAR
-            value: "true"
-          - name: ENKETO_REDIS_MAIN
-            value: redis-main
-          - name: ENKETO_REDIS_MAIN_URL
-            value: redis://redis-main:6379
-          - name: ENKETO_REDIS_MAIN_PORT
-            value: "6379"
-          - name: ENKETO_REDIS_CACHE
-            value: redis-cache
-          - name: ENKETO_REDIS_CACHE_URL
-            value: redis://redis-cache:6380
-          - name: ENKETO_REDIS_CACHE_PORT
-            value: "6379"                
+        volumeMounts:
+          - mountPath: /web
+            name: kobotoolbox-backups-kobocat                
       imagePullSecrets:
         - name: dockerhub
       restartPolicy: Always
       serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-kobocat
 status: {}
 ---
-# Source: basic-test/templates/deployments/kobotoolbox-deployment-template.yaml
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: kpi
+  name: kpi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kpi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: kpi
+    spec:
+      initContainers:
+        - command:
+          - sh
+          - -c
+          - until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+            do echo waiting for postgres; sleep 2; done
+          image: busybox:1.28
+          name: init-postgres
+      containers:
+      - name: kpi
+        image: scanterra/kobotoolbox_kpi:develop
+        imagePullPolicy: Always
+        env:
+        volumeMounts:
+          - mountPath: /srv/logs
+            name: kobotoolbox-log-kpi
+          - mountPath: /srv/src/kobocat/media
+            name: kobotoolbox-vols-kobocatmedia
+          - mountPath: /srv/src/kpi/media
+            name: kobotoolbox-vols-kpimedia
+          - mountPath: /srv/static
+            name: kobotoolbox-vols-static-kpi
+          - mountPath: /srv/whoosh
+            name: kobotoolbox-vols-whoosh                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-log-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-log-kpi
+        - name: kobotoolbox-vols-kobocatmedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kobocatmedia
+        - name: kobotoolbox-vols-kpimedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kpimedia
+        - name: kobotoolbox-vols-static-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kpi
+        - name: kobotoolbox-vols-whoosh
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-whoosh
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: mongo
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: scanterra/kobotoolbox_mongo:latest
+        imagePullPolicy: Always
+        env:
+          - name: MONGO_BACKUP_ARCHIVE_FILENAME
+            value: mongo_backup.mongorestore.tar.gz
+          - name: MONGO_BACKUP_SCHEDULE
+            value: 0 1 * * 0
+            MONGO_BACKUP_SCHEDULE: 0 1 * * *
+          - name: MONGO_DATA
+            value: /srv/db
+          - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
+            value: postgres_backup_kobotoolbox.pg_restore
+          - name: POSTGRES_BACKUP_SCHEDULE
+            value: 0 2 * * 0
+        volumeMounts:
+          - mountPath: /srv/backups
+            name: kobotoolbox-backups-mongo
+          - mountPath: /srv/db
+            name: kobotoolbox-vols-mongo                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-mongo
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-mongo
+        - name: kobotoolbox-vols-mongo
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-mongo
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: mongo-btsync
+  name: mongo-btsync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongo-btsync
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: mongo-btsync
+    spec:
+      containers:
+      - name: mongo-btsync
+        image: scanterra/btsync:rancher
+        imagePullPolicy: Always
+        env:
+        volumeMounts:
+          - mountPath: /web
+            name: kobotoolbox-backups-mongo                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-mongo
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-mongo
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1232,108 +919,726 @@ spec:
         image: scanterra/kobotoolbox_nginx:k8-deploy
         imagePullPolicy: Always
         env:
-          - name: CSRF_COOKIE_DOMAIN
-            value: .scanterra.com
-          - name: DATABASE_URL
-            value: postgres://kobo_superadmin:j3cA6eCIneo5nU5qjK8yXycaIu9B2l41@postgres:5432/kobotoolbox
-          - name: DJANGO_ALLOWED_HOSTS
-            value: .scanterra.com
-          - name: DJANGO_LANGUAGE_CODES
-            value: en fr es ar zh-hans hi ku
-          - name: DJANGO_SECRET_KEY
-            value: '"nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"'
-          - name: DJANGO_SETTINGS_MODULE
-            value: onadata.settings.kc_environ
-          - name: ENKETO_API_TOKEN
-            value: enketoapitoken
-          - name: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form
-          - name: ENKETO_SERVER_NAME
-            value: local.scancollect-form.scanterra.com
-          - name: ENKETO_URL
-            value: https://local.scancollect-form.scanterra.com
-          - name: ENKETO_VERSION
-            value: Express
-          - name: KOBOCAT_BROKER_URL
-            value: amqp://kobocat:kobocat@rabbit:5672/kobocat
-          - name: KOBOCAT_DJANGO_DEBUG
-            value: "False"
-          - name: KOBOCAT_PUBLIC_SUBDOMAIN
-            value: local.scancollect
-          - name: KOBOCAT_SERVER_NAME
-            value: local.scancollect.scanterra.com
-          - name: KOBOCAT_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KOBOCAT_URL
-            value: https://local.scancollect.scanterra.com
-          - name: KOBOCAT_WEB_SERVER
-            value: uWSGI
-          - name: KOBOFORM_PUBLIC_SUBDOMAIN
-            value: local.scancollect-form-edit
-          - name: KOBOFORM_SERVER_NAME
-            value: local.scancollect-form-edit.scanterra.com
-          - name: KOBOFORM_URL
-            value: https://local.scancollect-form-edit.scanterra.com
-          - name: KOBO_POSTGRES_DB_NAME
-            value: kobotoolbox
-          - name: KOBO_POSTGRES_USER
-            value: kobo_superadmin
-          - name: KOBO_SUPERUSER_PASSWORD
-            value: HsBUDwh6#JwVpBR@VILU
-          - name: KOBO_SUPERUSER_USERNAME
-            value: kobo_superadmin
-          - name: KOBO_SUPPORT_EMAIL
-            value: soporte@scanterra.com
-          - name: KPI_BROKER_URL
-            value: amqp://kpi:kpi@rabbit:5672/kpi
-          - name: KPI_DJANGO_DEBUG
-            value: "False"
-          - name: KPI_PREFIX
-            value: /
-          - name: KPI_STATIC_FILES_SERVER
-            value: Nginx
-          - name: KPI_WEB_SERVER
-            value: uWSGI
-          - name: NGINX_CONFIG_FILE_NAME
-            value: nginx_site_http.conf
-          - name: PUBLIC_DOMAIN_NAME
-            value: local.scanterra.com
-          - name: TEMPLATED_VAR_REFS
-            value: ${PUBLIC_DOMAIN_NAME} ${KOBOFORM_PUBLIC_SUBDOMAIN} ${KOBOCAT_PUBLIC_SUBDOMAIN}
-              ${ENKETO_EXPRESS_PUBLIC_SUBDOMAIN}
-          - name: TEMPLATE_DEBUG
-            value: "False"
-          - name: USE_ENV_VAR
-            value: "true"
         volumeMounts:
-          - mountPath: /srv/www/kobocat
-            name: kobotoolbox-vols-static-kobocat
-          - mountPath: /srv/www/kpi
-            name: kobotoolbox-vols-static-kpi
-          - mountPath: /srv/src/kpi/media
-            name: kobotoolbox-vols-kpimedia
           - mountPath: /var/log/nginx
             name: kobotoolbox-log-nginx
           - mountPath: /tmp/kobo_toolbox_secrets/
-            name: kobotoolbox-secrets                
+            name: kobotoolbox-secrets
+          - mountPath: /srv/src/kpi/media
+            name: kobotoolbox-vols-kpimedia
+          - mountPath: /srv/www/kobocat
+            name: kobotoolbox-vols-static-kobocat
+          - mountPath: /srv/www/kpi
+            name: kobotoolbox-vols-static-kpi                
       imagePullSecrets:
         - name: dockerhub
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-        - name: kobotoolbox-vols-static-kobocat
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-static-kobocat
-        - name: kobotoolbox-vols-static-kpi
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-static-kpi
-        - name: kobotoolbox-vols-kpimedia
-          persistentVolumeClaim:
-            claimName: kobotoolbox-vols-kpimedia
         - name: kobotoolbox-log-nginx
           persistentVolumeClaim:
             claimName: kobotoolbox-log-nginx
         - name: kobotoolbox-secrets
           persistentVolumeClaim:
             claimName: kobotoolbox-secrets
+        - name: kobotoolbox-vols-kpimedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kpimedia
+        - name: kobotoolbox-vols-static-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kobocat
+        - name: kobotoolbox-vols-static-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kpi
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: scanterra/postgis:9.6-2.4
+        imagePullPolicy: Always
+        env:
+          - name: ALLOW_IP_RANGE
+            value: 0.0.0.0/0
+          - name: POSTGRES_DBNAME
+            value: kobotoolbox
+          - name: POSTGRES_PASSWORD
+            value: j3cA6eCIneo5nU5qjK8yXycalu9B2I41
+          - name: POSTGRES_USER
+            value: kobo_superadmin
+        volumeMounts:
+          - mountPath: /srv/backups
+            name: kobotoolbox-backups-postgres
+          - mountPath: /var/lib/postgresql
+            name: kobotoolbox-vols-db                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-postgres
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-postgres
+        - name: kobotoolbox-vols-db
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-db
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: rabbit
+  name: rabbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rabbit
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: rabbit
+    spec:
+      containers:
+      - name: rabbit
+        image: scanterra/kobotoolbox_rabbit:latest
+        imagePullPolicy: Always
+        env:
+          - name: RABBITMQ_LOG_BASE
+            value: /var/log/rabbitmq
+        volumeMounts:
+          - mountPath: /var/log/rabbitmq
+            name: kobotoolbox-log-rabbitmq                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-log-rabbitmq
+          persistentVolumeClaim:
+            claimName: kobotoolbox-log-rabbitmq
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: redis-cache
+  name: redis-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: redis-cache
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: redis-cache
+    spec:
+      containers:
+      - name: redis-cache
+        image: scanterra/kobotoolbox_redis_cache:2.6
+        imagePullPolicy: Always
+        env:                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: redis-main
+  name: redis-main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: redis-main
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: redis-main
+    spec:
+      containers:
+      - name: redis-main
+        image: scanterra/kobotoolbox_redis_main:2.6
+        imagePullPolicy: Always
+        env:
+        volumeMounts:
+          - mountPath: /data/
+            name: kobotoolbox-vols-redismaindata                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-vols-redismaindata
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-redismaindata
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployment-services.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: smtp
+  name: smtp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: smtp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: smtp
+    spec:
+      containers:
+      - name: smtp
+        image: catatnight/postfix
+        imagePullPolicy: Always
+        env:
+          - name: maildomain
+            value: scanterra.com
+          - name: smtp_user
+            value: noreply:docker                
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployments-apps.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: enketo-express
+  name: enketo-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: enketo-express
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: enketo-express
+    spec:
+      containers:
+      - name: enketo-express
+        image: scanterra/kobotoolbox_enketo_express:k8-deploy
+        imagePullPolicy: Always
+        env:
+          # kobo user settings
+          - name: KOBO_SUPERUSER_USERNAME
+            value: kobo_superadmin
+          - name: KOBO_SUPERUSER_PASSWORD
+            value: HsBUDwh6#JwVpBR@VILU
+          - name: KOBO_SUPPORT_EMAIL
+            value: soporte@scanterra.com
+          - name: USE_ENV_VAR
+            value: true
+          - name: KOBOFORM_URL
+            value: https://cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_URL
+            value: https://cloneprod.scancollect.scanterra.com
+          - name: ENKETO_URL
+            value: https://cloneprod.scancollect-form.scanterra.com
+          - name: CSRF_COOKIE_DOMAIN
+            value: .scanterra.com
+          - name: DJANGO_ALLOWED_HOSTS
+            value: .scanterra.com
+          - name: KOBOFORM_SERVER_NAME
+            value: cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_SERVER_NAME
+            value: cloneprod.scancollect.scanterra.com
+          - name: ENKETO_SERVER_NAME
+            value: cloneprod.scancollect-form.scanterra.com
+          - value: TEMPLATE_DEBUG
+            value: False
+          # web server settings
+          - name: KPI_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_STATIC_FILES_SERVER
+            value: Nginx
+          - name: KPI_STATIC_FILES_SERVER
+            value: Nginx
+          - name: ENKETO_PROTOCOL
+            value: https
+          - name: ENKETO_VERSION
+            value: Express
+          - name: ENKETO_API_TOKEN
+            value: enketoapitoken
+          - name: DJANGO_SECRET_KEY
+            value: nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2
+          # email settings
+          - name: EMAIL_BACKEND
+            value: django.core.mail.backends.smtp.EmailBackend
+          - name: DEFAULT_FROM_EMAIL
+            value: soporte@scanterra.com
+
+          # celery
+          - name: CELERYD_TASK_TIME_LIMIT
+            value: 9000
+          - name: CELERYD_TASK_SOFT_TIME_LIMIT
+            value: 7200
+
+          # kobocat
+
+          # kpi
+
+          # nginx
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployments-apps.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: kobocat
+  name: kobocat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kobocat
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: kobocat
+    spec:
+      initContainers:
+        - command:
+          - sh
+          - -c
+          - until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+            do echo waiting for postgres; sleep 2; done
+          image: busybox:1.28
+          name: init-postgres
+        - command:
+          - sh
+          - -c
+          - until nslookup kpi.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+            do echo waiting for kpi; sleep 5; done
+          image: busybox:1.28
+          name: init-kpi
+      containers:
+      - name: kobocat
+        image: scanterra/kobotoolbox_kobocat:2.018.31
+        imagePullPolicy: Always
+        env:
+          # kobo user settings
+          - name: KOBO_SUPERUSER_USERNAME
+            value: kobo_superadmin
+          - name: KOBO_SUPERUSER_PASSWORD
+            value: HsBUDwh6#JwVpBR@VILU
+          - name: KOBO_SUPPORT_EMAIL
+            value: soporte@scanterra.com
+          - name: USE_ENV_VAR
+            value: true
+          - name: KOBOFORM_URL
+            value: https://cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_URL
+            value: https://cloneprod.scancollect.scanterra.com
+          - name: ENKETO_URL
+            value: https://cloneprod.scancollect-form.scanterra.com
+          - name: CSRF_COOKIE_DOMAIN
+            value: .scanterra.com
+          - name: DJANGO_ALLOWED_HOSTS
+            value: .scanterra.com
+          - name: KOBOFORM_SERVER_NAME
+            value: cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_SERVER_NAME
+            value: cloneprod.scancollect.scanterra.com
+          - name: ENKETO_SERVER_NAME
+            value: cloneprod.scancollect-form.scanterra.com
+          - value: TEMPLATE_DEBUG
+            value: False
+          # web server settings
+          - name: KPI_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_STATIC_FILES_SERVER
+            value: Nginx
+          - name: KPI_STATIC_FILES_SERVER
+            value: Nginx
+          - name: ENKETO_PROTOCOL
+            value: https
+          - name: ENKETO_VERSION
+            value: Express
+          - name: ENKETO_API_TOKEN
+            value: enketoapitoken
+          - name: DJANGO_SECRET_KEY
+            value: nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2
+          # email settings
+          - name: EMAIL_BACKEND
+            value: django.core.mail.backends.smtp.EmailBackend
+          - name: DEFAULT_FROM_EMAIL
+            value: soporte@scanterra.com
+
+          # celery
+          - name: CELERYD_TASK_TIME_LIMIT
+            value: 9000
+          - name: CELERYD_TASK_SOFT_TIME_LIMIT
+            value: 7200
+
+          # kobocat
+          - name: POSTGRES_BACKUP_SCHEDULE
+            value: 0 2 * * 0
+          - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
+            value: postgres_backup_kobotoolbox.pg_restore
+          - name: MONGO_BACKUP_SCHEDULE
+            value: 0 1 * * 0
+          - name: MONGO_BACKUP_ARCHIVE_FILENAME
+            value: mongo_backup.mongorestore.tar.gz
+          - name: KOBOCAT_MEDIA_BACKUP_SCHEDULE
+            value: 0 0 * * 0
+          - name: DJANGO_SETTINGS_MODULE
+            value: onadata.settings.kc_environ
+          - name: KOBOCAT_DJANGO_DEBUG
+            value: false
+          - name: DATABASE_URL
+            value: postgis://kobo_superadmin:j3cA6eCIneo5nU5qjK8yXycalu9B2I41@postgres:5432/kobotoolbox
+          - name: KOBO_POSTGRES_DB_NAME
+            value: kobotoolbox
+          - name: KOBO_POSTGRES_USER
+            value: kobo_superadmin
+          - name: KOBOCAT_BROKER_URL
+            value: amqp://kobocat:kobocat@rabbit:5672/kobocat
+
+          # kpi
+
+          # nginx
+        volumeMounts:
+          - mountPath: /srv/backups
+            name: kobotoolbox-backups-kobocat
+          - mountPath: /srv/logs
+            name: kobotoolbox-log-kobocat
+          - mountPath: /srv/src/kobocat/media
+            name: kobotoolbox-vols-kobocatmedia
+          - mountPath: /srv/static
+            name: kobotoolbox-vols-static-kobocat
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-backups-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-backups-kobocat
+        - name: kobotoolbox-log-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-log-kobocat
+        - name: kobotoolbox-vols-kobocatmedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kobocatmedia
+        - name: kobotoolbox-vols-static-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kobocat
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployments-apps.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: kpi
+  name: kpi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: kpi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: kpi
+    spec:
+      initContainers:
+        - command:
+          - sh
+          - -c
+          - until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local;
+            do echo waiting for postgres; sleep 2; done
+          image: busybox:1.28
+          name: init-postgres
+      containers:
+      - name: kpi
+        image: scanterra/kobotoolbox_kpi:develop
+        imagePullPolicy: Always
+        env:
+          # kobo user settings
+          - name: KOBO_SUPERUSER_USERNAME
+            value: kobo_superadmin
+          - name: KOBO_SUPERUSER_PASSWORD
+            value: HsBUDwh6#JwVpBR@VILU
+          - name: KOBO_SUPPORT_EMAIL
+            value: soporte@scanterra.com
+          - name: USE_ENV_VAR
+            value: true
+          - name: KOBOFORM_URL
+            value: https://cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_URL
+            value: https://cloneprod.scancollect.scanterra.com
+          - name: ENKETO_URL
+            value: https://cloneprod.scancollect-form.scanterra.com
+          - name: CSRF_COOKIE_DOMAIN
+            value: .scanterra.com
+          - name: DJANGO_ALLOWED_HOSTS
+            value: .scanterra.com
+          - name: KOBOFORM_SERVER_NAME
+            value: cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_SERVER_NAME
+            value: cloneprod.scancollect.scanterra.com
+          - name: ENKETO_SERVER_NAME
+            value: cloneprod.scancollect-form.scanterra.com
+          - value: TEMPLATE_DEBUG
+            value: False
+          # web server settings
+          - name: KPI_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_STATIC_FILES_SERVER
+            value: Nginx
+          - name: KPI_STATIC_FILES_SERVER
+            value: Nginx
+          - name: ENKETO_PROTOCOL
+            value: https
+          - name: ENKETO_VERSION
+            value: Express
+          - name: ENKETO_API_TOKEN
+            value: enketoapitoken
+          - name: DJANGO_SECRET_KEY
+            value: nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2
+          # email settings
+          - name: EMAIL_BACKEND
+            value: django.core.mail.backends.smtp.EmailBackend
+          - name: DEFAULT_FROM_EMAIL
+            value: soporte@scanterra.com
+
+          # celery
+          - name: CELERYD_TASK_TIME_LIMIT
+            value: 9000
+          - name: CELERYD_TASK_SOFT_TIME_LIMIT
+            value: 7200
+
+          # kobocat
+
+          # kpi
+          - name: KPI_DJANGO_DEBUG
+            value: false
+          - name: KPI_PREFIX
+            value: /
+          - name: KPI_BROKER_URL
+            value: amqp://kpi:kpi@rabbit:5672/kpi
+          - name: DATABASE_URL
+            value: postgres://kobo_superadmin:j3cA6eCIneo5nU5qjK8yXycalu9B2I41@postgres:5432/kobotoolbox
+          - name: DJANGO_LANGUAGE_CODES
+            value: en fr es ar zh-hans hi ku
+          - name: SECURE_PROXY_SSL_HEADER
+            value: HTTP_X_FORWARDED_PROTO, https
+
+          # nginx
+        volumeMounts:
+          - mountPath: /srv/logs
+            name: kobotoolbox-log-kpi
+          - mountPath: /srv/src/kobocat/media
+            name: kobotoolbox-vols-kobocatmedia
+          - mountPath: /srv/src/kpi/media
+            name: kobotoolbox-vols-kpimedia
+          - mountPath: /srv/static
+            name: kobotoolbox-vols-static-kpi
+          - mountPath: /srv/whoosh
+            name: kobotoolbox-vols-whoosh
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-log-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-log-kpi
+        - name: kobotoolbox-vols-kobocatmedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kobocatmedia
+        - name: kobotoolbox-vols-kpimedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kpimedia
+        - name: kobotoolbox-vols-static-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kpi
+        - name: kobotoolbox-vols-whoosh
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-whoosh
+status: {}
+---
+# Source: basic-test/templates/kobotoolbox-deployments-apps.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: scanterra/kobotoolbox_nginx:k8-deploy
+        imagePullPolicy: Always
+        env:
+          # kobo user settings
+          - name: KOBO_SUPERUSER_USERNAME
+            value: kobo_superadmin
+          - name: KOBO_SUPERUSER_PASSWORD
+            value: HsBUDwh6#JwVpBR@VILU
+          - name: KOBO_SUPPORT_EMAIL
+            value: soporte@scanterra.com
+          - name: USE_ENV_VAR
+            value: true
+          - name: KOBOFORM_URL
+            value: https://cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_URL
+            value: https://cloneprod.scancollect.scanterra.com
+          - name: ENKETO_URL
+            value: https://cloneprod.scancollect-form.scanterra.com
+          - name: CSRF_COOKIE_DOMAIN
+            value: .scanterra.com
+          - name: DJANGO_ALLOWED_HOSTS
+            value: .scanterra.com
+          - name: KOBOFORM_SERVER_NAME
+            value: cloneprod.scancollect-form-edit.scanterra.com
+          - name: KOBOCAT_SERVER_NAME
+            value: cloneprod.scancollect.scanterra.com
+          - name: ENKETO_SERVER_NAME
+            value: cloneprod.scancollect-form.scanterra.com
+          - value: TEMPLATE_DEBUG
+            value: False
+          # web server settings
+          - name: KPI_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_WEB_SERVER
+            value: uWSGI
+          - name: KOBOCAT_STATIC_FILES_SERVER
+            value: Nginx
+          - name: KPI_STATIC_FILES_SERVER
+            value: Nginx
+          - name: ENKETO_PROTOCOL
+            value: https
+          - name: ENKETO_VERSION
+            value: Express
+          - name: ENKETO_API_TOKEN
+            value: enketoapitoken
+          - name: DJANGO_SECRET_KEY
+            value: nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2
+          # email settings
+          - name: EMAIL_BACKEND
+            value: django.core.mail.backends.smtp.EmailBackend
+          - name: DEFAULT_FROM_EMAIL
+            value: soporte@scanterra.com
+
+          # celery
+          - name: CELERYD_TASK_TIME_LIMIT
+            value: 9000
+          - name: CELERYD_TASK_SOFT_TIME_LIMIT
+            value: 7200
+
+          # kobocat
+
+          # kpi
+
+          # nginx
+          - name: NGINX_CONFIG_FILE_NAME
+            value: nginx_site_http.conf
+          - name: TEMPLATED_VAR_REFS
+            value: $$scanterra.com $$cloneprod.scancollect-form-edit $$cloneprod.scancollect $$cloneprod.scancollect-form
+        volumeMounts:
+          - mountPath: /var/log/nginx
+            name: kobotoolbox-log-nginx
+          - mountPath: /tmp/kobo_toolbox_secrets/
+            name: kobotoolbox-secrets
+          - mountPath: /srv/src/kpi/media
+            name: kobotoolbox-vols-kpimedia
+          - mountPath: /srv/www/kobocat
+            name: kobotoolbox-vols-static-kobocat
+          - mountPath: /srv/www/kpi
+            name: kobotoolbox-vols-static-kpi
+      imagePullSecrets:
+        - name: dockerhub
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: kobotoolbox-log-nginx
+          persistentVolumeClaim:
+            claimName: kobotoolbox-log-nginx
+        - name: kobotoolbox-secrets
+          persistentVolumeClaim:
+            claimName: kobotoolbox-secrets
+        - name: kobotoolbox-vols-kpimedia
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-kpimedia
+        - name: kobotoolbox-vols-static-kobocat
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kobocat
+        - name: kobotoolbox-vols-static-kpi
+          persistentVolumeClaim:
+            claimName: kobotoolbox-vols-static-kpi
 status: {}
