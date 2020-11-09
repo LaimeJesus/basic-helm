@@ -22,7 +22,7 @@ spec:
       {{- if not (empty $service.initContainers) }}
       initContainers:
         {{- with $service.initContainers }}
-          {{- toYaml . | trim | nindent 8 }}
+          {{- toYaml . | trim | nindent 6 }}
         {{- end }}
       {{- end }}
       containers:
