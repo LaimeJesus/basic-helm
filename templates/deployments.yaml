@@ -22,7 +22,7 @@ spec:
       {{- if not (empty $deployment.initContainers) }}
       initContainers:
         {{- with $deployment.initContainers }}
-          {{- . | trim | nindent 6 }}
+          {{- toYaml . | trim | nindent 6 }}
         {{- end }}
       {{- end }}
       containers:
