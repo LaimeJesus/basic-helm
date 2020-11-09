@@ -1,5 +1,5 @@
 
-{{- define "apps" -}}
+{{- define "common-envs" -}}
           # apps
           - name: KOBO_SUPERUSER_USERNAME
             value: {{ .KOBO_SUPERUSER_USERNAME }}
@@ -88,7 +88,9 @@
           - name: CELERYD_TASK_SOFT_TIME_LIMIT
             value: {{ .TASK_SOFT_TIMEOUT }}
 {{- end }}
-{{- define "kobocat" -}}
+
+{{- define "specific-envs" -}}
+  {{- if eq .name "kobocat" }}
           - name: POSTGRES_BACKUP_SCHEDULE
             value: {{ .POSTGRES_BACKUP_SCHEDULE }}
           - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
@@ -122,8 +124,8 @@
             value: {{ .POSTGRES_USER }}
           - name: KOBOCAT_BROKER_URL
             value: {{ .KOBOCAT_BROKER_URL }}
-{{- end }}
-{{- define "kpi" -}}
+  {{- end }}
+  {{- if eq .name "kpi" }}
           - name: KPI_DJANGO_DEBUG
             value: {{ .KPI_DJANGO_DEBUG }}
           - name: KPI_PREFIX
@@ -138,62 +140,48 @@
           - name: SECURE_PROXY_SSL_HEADER
             value: HTTP_X_FORWARDED_PROTO, {{ .KOBOTOOLBOX_PROTOCOL }}
             {{- end }}
-{{- end }}
-{{- define "nginx" }}
+  {{- end }}
+  {{- if eq .name "nginx" }}
           - name: NGINX_CONFIG_FILE_NAME
             value: nginx_site_http.conf
           - name: TEMPLATED_VAR_REFS
-            value: $${{ .PUBLIC_DOMAIN_NAME }} $${{ .KOBOFORM_PUBLIC_SUBDOMAIN }} $${{ .KOBOCAT_PUBLIC_SUBDOMAIN }} $${{ .ENKETO_EXPRESS_PUBLIC_SUBDOMAIN }}
-{{- end }}
-
-{{- define "smtp" -}}
-          - name: maildomain
-            value: {{ .PUBLIC_DOMAIN_NAME }}
-          - name: smtp_user
-            value: {{ .EMAIL_HOST_USER }}:{{ .EMAIL_HOST_PASSWORD }}
-{{- end }}
-
-{{- define "rabbit" -}}
-          - name: RABBITMQ_LOG_BASE
-            value: /var/log/rabbitmq
-{{- end }}
-{{- define "db-backup" -}}
+            value: {{ .PUBLIC_DOMAIN_NAME }} {{ .KOBOFORM_PUBLIC_SUBDOMAIN }} {{ .KOBOCAT_PUBLIC_SUBDOMAIN }} {{ .ENKETO_EXPRESS_PUBLIC_SUBDOMAIN }}
+  {{- end }}
+  {{- if eq .name "db-backup" }}
           - name: ARCHIVE_FILENAME
             value: {{ .ARCHIVE_FILENAME }}
           - name: DUMPPREFIX
             value: {{ .DUMPPREFIX }}
           - name: PGHOST
-            value: {{ .POSTRES_HOST }}
+            value: {{ .POSTGRES_HOST }}
           - name: PGPASSWORD
             value: {{ .POSTGRES_PASSWORD }}
           - name: PGPORT
-            value: {{ .POSTRES_PORT }}
+            value: {{ .POSTGRES_PORT }}
           - name: PGUSER
             value: {{ .POSTGRES_USER }}
           - name: POSTGRES_DBNAME
             value: {{ .POSTGRES_DBNAME }}
           - name: POSTGRES_HOST
-            value: {{ .POSTRES_HOST }}
+            value: {{ .POSTGRES_HOST }}
           - name: POSTGRES_PASSWORD
             value: {{ .POSTGRES_PASSWORD }}
           - name: POSTGRES_PORT
-            value: {{ .POSTRES_PORT }}
+            value: {{ .POSTGRES_PORT }}
           - name: POSTGRES_USER
             value: {{ .POSTGRES_USER }}
           - name: WITH_POSTGIS
             value: "1"
-{{- end }}
-{{- define "postgres" }}
-          - name: ALLOW_IP_RANGE
-            value: 0.0.0.0/0
-          - name: POSTGRES_DBNAME
-            value: {{ .POSTGRES_DBNAME }}
-          - name: POSTGRES_PASSWORD
-            value: {{ .POSTGRES_PASSWORD }}
-          - name: POSTGRES_USER
-            value: {{ .POSTGRES_USER }}
-{{- end }}
-{{- define "mongo" -}}
+  {{- end }}
+  {{- if eq .name "mongo-btsync" }}
+          - name: DEVICE
+            value: ScanTerra Production - Mongo
+          - name: SECRET
+            value: ATCAWOQEHQJIGF6SLXUBL3BE6D2ZP3JF7
+          - name: STANDBY_MODE
+            value: "TRUE"
+  {{- end }}
+  {{- if eq .name "mongo" }}
           - name: MONGO_BACKUP_ARCHIVE_FILENAME
             value: {{ .MONGO_BACKUP_ARCHIVE_FILENAME }}
           - name: MONGO_BACKUP_SCHEDULE
@@ -205,8 +193,44 @@
             value: {{ .POSTGRES_BACKUP_ARCHIVE_FILENAME }}
           - name: POSTGRES_BACKUP_SCHEDULE
             value: {{ .POSTGRES_BACKUP_SCHEDULE }}
-{{- end }}
-{{- define "borg-backup-service" -}}
+  {{- end }}
+  {{- if eq .name "postgres" }}
+          - name: ALLOW_IP_RANGE
+            value: 0.0.0.0/0
+          - name: POSTGRES_DBNAME
+            value: {{ .POSTGRES_DBNAME }}
+          - name: POSTGRES_PASSWORD
+            value: {{ .POSTGRES_PASSWORD }}
+          - name: POSTGRES_USER
+            value: {{ .POSTGRES_USER }}
+  {{- end }}
+  {{- if eq .name "kobocat-btsync" }}
+          - name: DEVICE
+            value: ScanTerra Production - Kobocat
+          - name: SECRET
+            value: AW2VPXUMLCCPRRT6K53WEOUHT2HZCPVL3
+          - name: STANDBY_MODE
+            value: "TRUE"
+  {{- end }}
+  {{- if eq .name "kobo-postgres-btsync" }}
+          - name: DEVICE
+            value: ScanTerra Production - Kobo Postgres
+          - name: SECRET
+            value: APWDOMOXQCE74MVVJJFDWXD5YFMDS4VNC
+          - name: STANDBY_MODE
+            value: "TRUE"
+  {{- end }}
+  {{- if eq .name "rabbit" }}
+          - name: RABBITMQ_LOG_BASE
+            value: /var/log/rabbitmq
+  {{- end }}
+  {{- if eq .name "smtp" }}
+          - name: maildomain
+            value: {{ .PUBLIC_DOMAIN_NAME }}
+          - name: smtp_user
+            value: {{ .EMAIL_HOST_USER }}:{{ .EMAIL_HOST_PASSWORD }}
+  {{- end }}
+  {{- if eq .name "borg-backup-service" }}
           - name: ARCHIVE_PREFIX
             value: kobotoolbox
           - name: BACKUP_FROM
@@ -229,8 +253,8 @@
             value: "1"
           - name: PRUNE
             value: "1"
-{{- end }}
-{{- define "borg-backup-service-server" -}}
+  {{- end }}
+  {{- if eq .name "borg-backup-service-server" }}
           - name: ARCHIVE_PREFIX
             value: kobotoolbox
           - name: BORG_PASSPHRASE
@@ -241,4 +265,5 @@
             value: /borg/repo
           - name: USERS
             value: root
+  {{- end }}
 {{- end }}

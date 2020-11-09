@@ -1,4 +1,4 @@
-{{ range $idx, $service := (merge .Values.services .Values.apps) }}
+{{ range $idx, $service := .Values.services }}
 {{- if and (not (empty $service.ports)) $service.deploy }}
 ---
 apiVersion: v1

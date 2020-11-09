@@ -20,10 +20,11 @@ restartPolicy: Always
 imagePullPolicy: Always
 serviceAccountName: ""
 
-apps:
+services:
   kpi:
     image: scanterra/kobotoolbox_kpi:develop
     deploy: true
+    envs: true
     initContainers:
       - name: init-postgres
         image: busybox:1.28
@@ -39,6 +40,7 @@ apps:
   kobocat:
     image: scanterra/kobotoolbox_kobocat:2.018.31
     deploy: true
+    envs: true
     initContainers:
       - name: init-postgres
         image: busybox:1.28
@@ -56,11 +58,13 @@ apps:
   enketo-express:
     image: scanterra/kobotoolbox_enketo_express:k8-deploy
     deploy: true
+    envs: true
     ports:
       default: 8005
   nginx:
     image: scanterra/kobotoolbox_nginx:k8-deploy
     deploy: true
+    envs: true
     ports:
       kpi: 9000
       kobocat: 9001
@@ -71,20 +75,22 @@ apps:
       kobotoolbox-vols-kpimedia: /srv/src/kpi/media
       kobotoolbox-log-nginx: /var/log/nginx
       kobotoolbox-secrets: /tmp/kobo_toolbox_secrets/
-services:
   db-backup:
     image: scanterra/pg-backup:9.6
     deploy: true
+    envs: true
     volumes:
       kobotoolbox-backups-postgres: /backups
   mongo-btsync:
     image: scanterra/btsync:rancher
     deploy: true
+    envs: true
     volumes:
       kobotoolbox-backups-mongo: /web
   mongo:
     image: scanterra/kobotoolbox_mongo:latest
     deploy: true
+    envs: true
     ports:
       default: 27017
     volumes:
@@ -93,6 +99,7 @@ services:
   postgres:
     image: scanterra/postgis:9.6-2.4
     deploy: true
+    envs: true
     ports:
       default: 5432
     volumes:
@@ -101,16 +108,19 @@ services:
   kobocat-btsync:
     image: scanterra/btsync:rancher
     deploy: true
+    envs: true
     volumes:
       kobotoolbox-backups-kobocat: /web
   kobo-postgres-btsync:
     image: scanterra/btsync:rancher
     deploy: true
+    envs: true
     volumes:
       kobotoolbox-backups-postgres: /web
   rabbit:
     image: scanterra/kobotoolbox_rabbit:latest
     deploy: true
+    envs: true
     ports:
       default: 5672
     volumes:
@@ -130,14 +140,17 @@ services:
   smtp:
     image: catatnight/postfix
     deploy: true
+    envs: true
     ports:
       default: 25
   borg-backup-service:
     image: lucernae/borgbackup:1.1.8
     deploy: true
+    envs: true
   borg-backup-service-server:
     image: lucernae/borgbackup:1.1.8
     deploy: true
+    envs: true
     volumes:
       kobotoolbox-borg-users-home: /root
       kobotoolbox-borg-repo: /borg/repo

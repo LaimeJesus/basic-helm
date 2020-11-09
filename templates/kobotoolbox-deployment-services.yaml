@@ -1,4 +1,4 @@
-{{ range $idx, $service := (merge .Values.services .Values.apps) }}
+{{ range $idx, $service := .Values.services }}
 {{- if $service.deploy }}
 ---
 apiVersion: apps/v1
@@ -29,36 +29,13 @@ spec:
       - name: {{ $idx }}
         image: {{ $service.image }}
         imagePullPolicy: {{ $.Values.imagePullPolicy }}
+        {{- if not (empty $service.envs) }}
         env:
-        {{- if has $idx (list "nginx" "kpi" "kobocat" "enketo-express") }}
-          {{ template "apps" $.Values }}
-        {{- end }}
-        {{- if eq $idx "kobocat" }}
-          {{ template "kobocat" $.Values }}
-        {{- end }}
-        {{- if eq $idx "kpi" }}
-          {{ template "kpi" $.Values }}
-        {{- end }}
-        {{- if eq $idx "nginx" }}
-          {{ template "nginx" $.Values }}
-        {{- end }}
-        {{- if eq $idx "rabbit" }}
-          {{ template "rabbit" $.Values }}
-        {{- end }}
-        {{- if eq $idx "db-backup" }}
-          {{ template "db-backup" $.Values }}
-        {{- end }}
-        {{- if eq $idx "postgres" }}
-          {{ template "postgres" $.Values }}
-        {{- end }}
-        {{- if eq $idx "mongo" }}
-          {{ template "mongo" $.Values }}
-        {{- end }}
-        {{- if eq $idx "borg-backup-service" }}
-          {{ template "borg-backup-service" $.Values }}
-        {{- end }}
-        {{- if eq $idx "borg-backup-service-server" }}
-          {{ template "borg-backup-service-server" $.Values }}
+          {{- if has $idx (list "nginx" "kpi" "kobocat" "enketo-express") }}
+            {{ template "common-envs" $.Values }}
+          {{- end }}
+          {{- $specificEnvs := set $.Values "name" $idx }}
+          {{- template "specific-envs" $specificEnvs }}
         {{- end }}
         {{- if not (empty .volumes) }}
         volumeMounts:
