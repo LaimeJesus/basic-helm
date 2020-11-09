@@ -1,14 +1,14 @@
-{{ range $idx, $size := .Values.volumeClaims.definitions }}
+{{ range $idx, $size := .Values.volumeClaims }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ $idx }}
 spec:
-  storageClassName: {{ $.Values.volumeClaims.storageClass }}
+  storageClassName: {{ $.Values.storageClass }}
   volumeName: {{ $idx }}
   accessModes:
-    - {{ $.Values.volumeClaims.accessMode }}
+    - {{ $.Values.accessMode }}
   resources:
     requests:
       storage: {{ $size }}

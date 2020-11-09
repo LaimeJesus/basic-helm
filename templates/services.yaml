@@ -1,4 +1,4 @@
-{{ range $idx, $service := .Values.services }}
+{{ range $idx, $service := .Values.deployments }}
 {{- if and (not (empty $service.ports)) $service.deploy }}
 ---
 apiVersion: v1

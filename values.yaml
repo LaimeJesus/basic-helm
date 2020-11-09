@@ -12,7 +12,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "kobotoolbox-user"
+  name: "user"
 
 # Rancher Charts no soporta array field: https://github.com/rancher/rancher/issues/24918
 imagePullSecrets: dockerhub
@@ -32,11 +32,11 @@ deployments:
     ports:
       default: 8000
     volumes:
-      kobotoolbox-vols-static-kpi: /srv/static
-      kobotoolbox-vols-kpimedia: /srv/src/kpi/media
-      kobotoolbox-vols-whoosh: /srv/whoosh
-      kobotoolbox-log-kpi: /srv/logs
-      kobotoolbox-vols-kobocatmedia: /srv/src/kobocat/media
+      vols-static-kpi: /srv/static
+      vols-kpimedia: /srv/src/kpi/media
+      vols-whoosh: /srv/whoosh
+      log-kpi: /srv/logs
+      vols-kobocatmedia: /srv/src/kobocat/media
   kobocat:
     image: scanterra/kobotoolbox_kobocat:2.018.31
     deploy: true
@@ -51,10 +51,10 @@ deployments:
     ports:
       default: 8000
     volumes:
-      kobotoolbox-vols-static-kobocat: /srv/static
-      kobotoolbox-vols-kobocatmedia: /srv/src/kobocat/media
-      kobotoolbox-backups-kobocat: /srv/backups
-      kobotoolbox-log-kobocat: /srv/logs
+      vols-static-kobocat: /srv/static
+      vols-kobocatmedia: /srv/src/kobocat/media
+      backups-kobocat: /srv/backups
+      log-kobocat: /srv/logs
   enketo-express:
     image: scanterra/kobotoolbox_enketo_express:k8-deploy
     deploy: true
@@ -70,23 +70,23 @@ deployments:
       kobocat: 9001
       enketo-express: 9005
     volumes:
-      kobotoolbox-vols-static-kobocat: /srv/www/kobocat
-      kobotoolbox-vols-static-kpi: /srv/www/kpi
-      kobotoolbox-vols-kpimedia: /srv/src/kpi/media
-      kobotoolbox-log-nginx: /var/log/nginx
-      kobotoolbox-secrets: /tmp/kobo_toolbox_secrets/
+      vols-static-kobocat: /srv/www/kobocat
+      vols-static-kpi: /srv/www/kpi
+      vols-kpimedia: /srv/src/kpi/media
+      log-nginx: /var/log/nginx
+      secrets: /tmp/kobo_toolbox_secrets/
   db-backup:
     image: scanterra/pg-backup:9.6
     deploy: true
     envs: true
     volumes:
-      kobotoolbox-backups-postgres: /backups
+      backups-postgres: /backups
   mongo-btsync:
     image: scanterra/btsync:rancher
     deploy: true
     envs: true
     volumes:
-      kobotoolbox-backups-mongo: /web
+      backups-mongo: /web
   mongo:
     image: scanterra/kobotoolbox_mongo:latest
     deploy: true
@@ -94,8 +94,8 @@ deployments:
     ports:
       default: 27017
     volumes:
-      kobotoolbox-vols-mongo: /srv/db
-      kobotoolbox-backups-mongo: /srv/backups
+      vols-mongo: /srv/db
+      backups-mongo: /srv/backups
   postgres:
     image: scanterra/postgis:9.6-2.4
     deploy: true
@@ -103,20 +103,20 @@ deployments:
     ports:
       default: 5432
     volumes:
-      kobotoolbox-vols-db: /var/lib/postgresql
-      kobotoolbox-backups-postgres: /srv/backups
+      vols-db: /var/lib/postgresql
+      backups-postgres: /srv/backups
   kobocat-btsync:
     image: scanterra/btsync:rancher
     deploy: true
     envs: true
     volumes:
-      kobotoolbox-backups-kobocat: /web
+      backups-kobocat: /web
   kobo-postgres-btsync:
     image: scanterra/btsync:rancher
     deploy: true
     envs: true
     volumes:
-      kobotoolbox-backups-postgres: /web
+      backups-postgres: /web
   rabbit:
     image: scanterra/kobotoolbox_rabbit:latest
     deploy: true
@@ -124,7 +124,7 @@ deployments:
     ports:
       default: 5672
     volumes:
-      kobotoolbox-log-rabbitmq: /var/log/rabbitmq
+      log-rabbitmq: /var/log/rabbitmq
   redis-cache:
     image: scanterra/kobotoolbox_redis_cache:2.6
     deploy: true
@@ -136,7 +136,7 @@ deployments:
     ports:
       default: 6379
     volumes:
-      kobotoolbox-vols-redismaindata: /data/
+      vols-redismaindata: /data/
   smtp:
     image: catatnight/postfix
     deploy: true
@@ -152,34 +152,34 @@ deployments:
     deploy: true
     envs: true
     volumes:
-      kobotoolbox-borg-users-home: /root
-      kobotoolbox-borg-repo: /borg/repo
-      kobotoolbox-borg-cache: /root/.cache/borg
-      kobotoolbox-vols-kobocatmedia: /borg/data/kobocatmedia
-      kobotoolbox-vols-kpimedia: /borg/data/kpimedia
-      kobotoolbox-backups-postgres: /borg/data/rawbackups/postgres
-      kobotoolbox-backups-mongo: /borg/data/rawbackups/mongo
+      borg-users-home: /root
+      borg-repo: /borg/repo
+      borg-cache: /root/.cache/borg
+      vols-kobocatmedia: /borg/data/kobocatmedia
+      vols-kpimedia: /borg/data/kpimedia
+      backups-postgres: /borg/data/rawbackups/postgres
+      backups-mongo: /borg/data/rawbackups/mongo
+
+storageClass: "manual"
+accessMode: "ReadWriteOnce"
 
 volumeClaims:
-  storageClass: "manual"
-  accessMode: "ReadWriteOnce"
-  definitions:
-    kobotoolbox-backups-kobocat: "100Mi"
-    kobotoolbox-backups-mongo: "100Mi"
-    kobotoolbox-backups-postgres: 100Mi"
-    kobotoolbox-log-kobocat: 100Mi"
-    kobotoolbox-log-kpi: "100Mi"
-    kobotoolbox-log-nginx: "100Mi"
-    kobotoolbox-log-rabbitmq": "100Mi"
-    kobotoolbox-secrets: 100Mi"
-    kobotoolbox-vols-db: "1Gi"
-    kobotoolbox-vols-kobocatmedia: "100Mi"
-    kobotoolbox-vols-kpimedia: "100Mi"
-    kobotoolbox-vols-mongo: "100Mi"
-    kobotoolbox-vols-redismaindata: "100Mi"
-    kobotoolbox-vols-static-kobocat: "100Mi"
-    kobotoolbox-vols-static-kpi: "100Mi"
-    kobotoolbox-vols-whoosh: "100Mi"
+  backups-kobocat: "100Mi"
+  backups-mongo: "100Mi"
+  backups-postgres: "100Mi"
+  log-kobocat: "100Mi"
+  log-kpi: "100Mi"
+  log-nginx: "100Mi"
+  log-rabbitmq: "100Mi"
+  secrets: "100Mi"
+  vols-db: "1Gi"
+  vols-kobocatmedia: "100Mi"
+  vols-kpimedia: "100Mi"
+  vols-mongo: "100Mi"
+  vols-redismaindata: "100Mi"
+  vols-static-kobocat: "100Mi"
+  vols-static-kpi: "100Mi"
+  vols-whoosh: "100Mi"
 
 # envs
 ENKETO_API_TOKEN: enketoapitoken
