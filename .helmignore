@@ -10,6 +10,7 @@
 .hg/
 .hgignore
 .svn/
+.github/
 # Common backup files
 *.swp
 *.bak
@@ -24,3 +25,4 @@
 
 *debug
 utils/
+
