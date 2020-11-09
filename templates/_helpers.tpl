@@ -47,7 +47,7 @@
           - name: ENKETO_SERVER_NAME
             value: {{ .ENKETO_SERVER_NAME }}
           {{- end }}
-          - value: TEMPLATE_DEBUG
+          - name: TEMPLATE_DEBUG
             value: False
           # web server settings
           - name: KPI_WEB_SERVER
