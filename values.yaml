@@ -20,7 +20,7 @@ restartPolicy: Always
 imagePullPolicy: Always
 serviceAccountName: ""
 
-services:
+deployments:
   kpi:
     image: scanterra/kobotoolbox_kpi:develop
     deploy: true

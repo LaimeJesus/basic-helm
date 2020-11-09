@@ -1,5 +1,5 @@
-{{ range $idx, $service := .Values.services }}
-{{- if $service.deploy }}
+{{ range $idx, $deployment := .Values.deployments }}
+{{- if $deployment.deploy }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,11 +19,17 @@ spec:
       labels:
         io.kompose.service: {{ $idx }}
     spec:
+      {{- if not (empty $deployment.initContainers) }}
+      initContainers:
+        {{- with $deployment.initContainers }}
+          {{- . | trim | nindent 6 }}
+        {{- end }}
+      {{- end }}
       containers:
       - name: {{ $idx }}
-        image: {{ $service.image }}
+        image: {{ $deployment.image }}
         imagePullPolicy: {{ $.Values.imagePullPolicy }}
-        {{- if not (empty $service.envs) }}
+        {{- if not (empty $deployment.envs) }}
         env:
           {{- if has $idx (list "nginx" "kpi" "kobocat" "enketo-express") }}
             {{ template "common-envs" $.Values }}
@@ -46,7 +52,7 @@ spec:
       serviceAccountName: ""
       {{- if not (empty .volumes) }}
       volumes:
-        {{- with $service.volumes }}
+        {{- with $deployment.volumes }}
             {{- range $idx, $val := .}}
         - name: {{ $idx }}
           persistentVolumeClaim:
