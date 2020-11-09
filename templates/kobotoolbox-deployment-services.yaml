@@ -19,12 +19,6 @@ spec:
       labels:
         io.kompose.service: {{ $idx }}
     spec:
-      {{- if not (empty $service.initContainers) }}
-      initContainers:
-        {{- with $service.initContainers }}
-          {{- . | trim | nindent 6 }}
-        {{- end }}
-      {{- end }}
       containers:
       - name: {{ $idx }}
         image: {{ $service.image }}
