@@ -186,7 +186,6 @@
             value: {{ .MONGO_BACKUP_ARCHIVE_FILENAME }}
           - name: MONGO_BACKUP_SCHEDULE
             value: {{ .MONGO_BACKUP_SCHEDULE }}
-            MONGO_BACKUP_SCHEDULE: 0 1 * * *
           - name: MONGO_DATA
             value: {{ .MONGO_DATA }}
           - name: POSTGRES_BACKUP_ARCHIVE_FILENAME
