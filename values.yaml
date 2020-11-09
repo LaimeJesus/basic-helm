@@ -222,6 +222,7 @@ TASK_SOFT_TIMEOUT: 7200
 TASK_TIMEOUT: 9000
 USE_CUSTOM_KOBOCAT: false
 CUSTOM_KOBOCAT_THEME_APP_PIP_URL: "git+https://git@github.com/scanterra/custom_kobocat_theme.git@develop"
+CUSTOM_KOBOCAT_THEME_DEPLOY_KEY: ""
 CUSTOM_KOBOCAT_DJANGO_SETTINGS_MODULE: "custom_kobocat_theme.settings"
 CUSTOM_KOBOCAT_PYTHONPATH: "/srv/src/kobocat:/srv/src/custom_kobocat_theme"
 ARCHIVE_FILENAME: /backups/postgres_backup
