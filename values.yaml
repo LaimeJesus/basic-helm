@@ -39,12 +39,12 @@ ingress:
       port: "9005"
 
 certManager:
-  enabled: false
-  issuer: letsencrypt-issuer
-  secretName: secret-tls
-  secretRef: secret-ref
+  enabled: true
+  issuer: issuer-prod
+  secretName: secret-tls-prod
+  secretRef: secret-ref-prod
   email: scanagroempresa@scanterra.com
-  staging: true
+  staging: false
 
 cronjobs:
   borg-backup-service:
