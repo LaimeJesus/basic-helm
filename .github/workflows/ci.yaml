@@ -6,3 +6,12 @@ on:
       - 'charts/**'
 
 jobs:
+  feature-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello-feature
+        run: echo "Hello Feature"
+      - name: hello-branch
+        run: echo "Hello ${{ github.ref }}"
+      - name: hello-sha
+        run: echo "Hello ${{ github.sha }}"
