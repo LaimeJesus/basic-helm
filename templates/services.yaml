@@ -1,5 +1,5 @@
-{{ range $idx, $service := .Values.deployments }}
-{{- if and (not (empty $service.ports)) $service.deploy }}
+{{ range $idx, $deployment := .Values.deployments }}
+{{- if and (not (empty $deployment.ports)) $deployment.deploy }}
 ---
 apiVersion: v1
 kind: Service
@@ -11,7 +11,7 @@ spec:
   selector:
     io.kompose.service: {{ $idx }}
   ports:
-    {{- with $service.ports }}
+    {{- with $deployment.ports }}
       {{- range $idx, $val := .}}
     - name: {{ $idx }}
       port: {{ $val }}

@@ -7,22 +7,28 @@ questions:
     type: string
     group: Required
 
-  # deploys
+  - variable: storageClass
+    default: local-storage
+    label: Set Storage Class for Persistant Volumes
+    type: string
+    group: Required
+
+  # Deploys
   - variable: deployments.kpi.deploy
     default: true
     label: Enable deploy Kpi
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
       - variable: deployments.kpi.image
         label: Kpi Image
-        default: scanterra/kobotoolbox_kpi:develop
+        default: scanterra/kobotoolbox_kpi:k8-deploy
         type: string
   - variable: deployments.kobocat.deploy
     default: true
     label: Enable deploy Kobocat
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -33,7 +39,7 @@ questions:
   - variable: deployments.enketo-express.deploy
     default: true
     label: Enable deploy Enketo Express
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -44,7 +50,7 @@ questions:
   - variable: deployments.nginx.deploy
     default: true
     label: Enable deploy Nginx
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -56,7 +62,7 @@ questions:
   - variable: deployments.postgres.deploy
     default: true
     label: Enable deploy Postgres
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -67,7 +73,7 @@ questions:
   - variable: deployments.mongo.deploy
     default: true
     label: Enable deploy Mongo
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -78,7 +84,7 @@ questions:
   - variable: deployments.rabbit.deploy
     default: true
     label: Enable deploy Rabbit
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -89,7 +95,7 @@ questions:
   - variable: deployments.redis-cache.deploy
     default: true
     label: Enable deploy Redis Cache
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -100,7 +106,7 @@ questions:
   - variable: deployments.redis-main.deploy
     default: true
     label: Enable deploy Redis Main
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -111,7 +117,7 @@ questions:
   - variable: deployments.redis-cache.deploy
     default: true
     label: Enable deploy Redis Cache
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -123,7 +129,7 @@ questions:
   - variable: deployments.db-backup.deploy
     default: true
     label: Enable deploy Db Backup
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -134,7 +140,7 @@ questions:
   - variable: deployments.mongo-btsync.deploy
     default: true
     label: Enable deploy Mongo Btsync
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -145,7 +151,7 @@ questions:
   - variable: deployments.kobocat-btsync.deploy
     default: true
     label: Enable deploy Kobocat Btsync
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -156,7 +162,7 @@ questions:
   - variable: deployments.kobo-postgres-btsync.deploy
     default: true
     label: Enable deploy Kobo Postgres Btsync
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -167,7 +173,7 @@ questions:
   - variable: deployments.smtp.deploy
     default: true
     label: Enable deploy Smtp
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -175,32 +181,25 @@ questions:
         label: Smtp Image
         default: catatnight/postfix
         type: string
-  - variable: deployments.smtp.deploy
-    default: true
-    label: Enable deploy Smtp
-    type: string
-    group: Deploy
-    show_subquestion_if: true
-    subquestions:
-      - variable: deployments.smtp.image
-        label: Smtp Image
-        default: lucernae/borgbackup:1.1.8
-        type: string
-  - variable: deployments.borg-backup-service.deploy
+  - variable: cronjobs.borg-backup-service.deploy
     default: true
     label: Enable deploy Borg Backup Service
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
-      - variable: deployments.borg-backup-service.image
+      - variable: cronjobs.borg-backup-service.image
         label: Borg Backup Service Image
         default: lucernae/borgbackup:1.1.8
+        type: string
+      - variable: cronjobs.borg-backup-service.schedule
+        label: borg-backup-service Schedule
+        default: '0 */5 * * *'
         type: string
   - variable: deployments.borg-backup-service-server.deploy
     default: true
     label: Enable deploy Borg Backup Service Server
-    type: string
+    type: boolean
     group: Deploy
     show_subquestion_if: true
     subquestions:
@@ -209,69 +208,132 @@ questions:
         default: lucernae/borgbackup:1.1.8
         type: string
 
-  - variable: ENKETO_API_TOKEN
-    label: "Enketo API Token"
-    description: "Can be initialized with random string."
-    required: true
-    default: enketoapitoken
-    type: string
-  - variable: DJANGO_SECRET_KEY
-    label: "Django Secret Key"
-    description: "Can be initialized with random string."
-    required: true
-    default: "nhjh^gy1l@w4*#l)v5-v&rx0g5zgx!-9uygf786u!f6k9hs6+2"
-    type: string
+  ## Ingress
+  - variable: "ingress.enabled"
+    label: "Enable Ingress"
+    required: false
+    type: boolean
+    default: true
+    group: Ingress
+    show_subquestion_if: true
+    subquestions:
+    - variable: "ingress.name"
+      label: "Ingress Name"
+      required: false
+      type: string
+      default: "kobotoolbox-ingress"
+      group: Ingress
+
+  ## Certificados SSL
+  - variable: "certManager.enabled"
+    label: "Only Enable this if Cert Manager ready and Stack is already up"
+    description: "Enable Cert Manager configuration"
+    required: false
+    type: boolean
+    default: false
+    group: CertManager
+    show_subquestion_if: true
+    subquestions:
+    - variable: "certManager.issuer"
+      label: "Only Enable this if Cert Manager ready"
+      description: "Cert Manager Issuer Name"
+      required: false
+      type: string
+      default: letsencrypt-issuer
+      group: CertManager
+    - variable: "certManager.secretName"
+      label: "Only Enable this if Cert Manager ready"
+      description: "Cert Manager Secret Name"
+      required: false
+      type: string
+      default: secret-tls
+      group: CertManager
+    - variable: "certManager.secretRef"
+      label: "Only Enable this if Cert Manager ready"
+      description: "Cert Manager Secret Ref. Must be different than Secret Name"
+      required: false
+      type: string
+      default: secret-ref
+      group: CertManager
+    - variable: "certManager.email"
+      label: "Only Enable this if Cert Manager ready"
+      description: "Cert Manager Email"
+      required: false
+      type: string
+      default: scanagroempresa@scanterra.com
+      group: CertManager
+    - variable: "certManager.staging"
+      label: "Only Enable this if Cert Manager ready"
+      description: "Cert Manager use ACME staging API"
+      required: false
+      type: boolean
+      default: false
+      group: CertManager
+
+    ## Databases
   - variable: KOBO_SUPERUSER_USERNAME
     label: "Superuser username"
     required: true
     default: "kobo_superadmin"
     type: string
+    group: Databases
   - variable: KOBO_SUPERUSER_PASSWORD
     label: "Superuser password"
     required: true
-    default: "HsBUDwh6#JwVpBR@VILU"
+    default: "KOBO_SUPERUSER_PASSWORD"
     type: string
+    group: Databases
   - variable: POSTGRES_HOST
     label: "Postgres host"
     required: true
     default: "postgres"
     type: string
+    group: Databases
   - variable: POSTGRES_PORT
     label: "Postgres port"
     required: true
-    default: 5432
-    type: int
+    default: "5432"
+    type: string
+    group: Databases
   - variable: POSTGRES_USER
     label: "Postgres superuser username"
     required: true
     default: "kobo_superadmin"
     type: string
+    group: Databases
   - variable: POSTGRES_PASSWORD
     label: "Postgres superuser password"
     required: true
-    default: "j3cA6eCIneo5nU5qjK8yXycalu9B2I41"
+    default: "POSTGRES_PASSWORD"
     type: string
+    group: Databases
   - variable: POSTGRES_DBNAME
     label: "Postgres database"
     required: true
     default: kobotoolbox
     type: string
+    group: Databases
   - variable: KOBO_SUPPORT_EMAIL
     label: "Kobo support email"
     required: true
     default: "soporte@scanterra.com"
     type: string
+    group: Databases
+
+    # Domains
   - variable: PUBLIC_DOMAIN_NAME
     label: "Public Domain Name"
     description: "Domain name addressable from the outside"
     required: true
     default: "scanterra.com"
     type: string
+    group: Domain
   - variable: WEBSERVER_PORT
     label: "Addressable port for web"
     required: true
-    default: 82
-    type: int
+    default: "80"
+    type: string
+    group: Domain
   - variable: KOBOTOOLBOX_PROTOCOL
     label: "Web protocol to use"
     description: "Set up certificate manually from Rancher if using https"
@@ -280,6 +342,7 @@ questions:
     options:
       - http
       - https
+    group: Domain
   - variable: PROXY_WEB_SERVER
     label: "Proxying method to use"
     type: enum
@@ -287,164 +350,223 @@ questions:
     options:
       - uWSGI
       - Nginx
+    group: Domain
   - variable: KOBOFORM_PUBLIC_SUBDOMAIN
     label: "Public Subdomain of koboform"
     description: "Domain name addressable from the outside"
     required: true
-    default: "example.scancollect-form-edit"
+    default: "scancollect-form-edit"
     type: string
+    group: Domain
   - variable: KOBOCAT_PUBLIC_SUBDOMAIN
     label: "Public Subdomain of kobocat"
     description: "Domain name addressable from the outside"
     required: true
-    default: "example.scancollect"
+    default: "scancollect"
     type: string
+    group: Domain
   - variable: ENKETO_EXPRESS_PUBLIC_SUBDOMAIN
     label: "Public Subdomain of enketo express"
     description: "Domain name addressable from the outside"
     required: true
-    default: "example.scancollect-form"
+    default: "scancollect-form"
     type: string
-
-  - variable: USE_EXTERNAL_SMTP
-    label: "Use external SMTP host"
-    description: "Set to false to use local SMTP server for testing"
-    default: false
-    type: boolean
-  - variable: EMAIL_HOST
-    label: "SMTP host to use"
-    description: "Only used if using external SMTP"
-    type: string
-
-  - variable: EMAIL_PORT
-    label: "SMTP port to use"
-    description: "Only used if using external SMTP"
-    type: string
-
-  - variable: EMAIL_HOST_USER
-    label: "SMTP host user"
-    description: "Only used if using external SMTP"
-    type: string
-
-  - variable: EMAIL_HOST_PASSWORD
-    label: "Email host password"
-    description: "Only used if using external SMTP"
-    type: string
-
-  - variable: EMAIL_USE_TLS
-    label: "Email TLS settings"
-    description: "Only used if using external SMTP"
-    type: enum
-    default: 'False'
-    options:
-      - 'True'
-      - 'False'
-
-  - variable: BORG_BACKUP_FREQUENCY
-    label: "Rancher Cron schedule of Borg backup service."
-    type: string
-    default: '0 */5 * * *'
-
-  - variable: BORG_PASSPHRASE
-    label: "BORG Passphrase for encryption."
-    type: string
-    default: 'kobotoolboxincrementalbackup'
-
-  - variable: POSTGRES_BACKUP_SCHEDULE
-    label: "Cron schedule of Postgres backup."
-    type: string
-    default: '0 2 * * 0'
-
-  - variable: MONGO_BACKUP_SCHEDULE
-    label: "Cron schedule of Mongo db backup."
-    type: string
-    default: '0 1 * * 0'
-
-  - variable: KOBOCAT_MEDIA_BACKUP_SCHEDULE
-    label: "Cron schedule of KoboCat media backup."
-    type: string
-    default: '0 0 * * 0'
-
-  - variable: USE_ENV_VAR
-    label: "Use custom defined environment variable"
-    description: "Set this to true if you choose to define the rest of env var by yourself"
-    required: true
-    default: true
-    type: boolean
-
+    group: Domain
   - variable: KOBOFORM_SERVER_NAME
     label: "Full Server Name for Koboform"
     description: "Optional only if using USE_ENV_VAR set to true"
     required: true
-    default: "example.scancollect-form-edit.scanterra.com"
+    default: "scancollect-form-edit.scanterra.com"
     type: string
+    group: Domain
   - variable: KOBOCAT_SERVER_NAME
     label: "Full Server Name for Kobocat"
     description: "Optional only if using USE_ENV_VAR set to true"
     required: true
-    default: "example.scancollect.scanterra.com"
+    default: "scancollect.scanterra.com"
     type: string
+    group: Domain
   - variable: ENKETO_SERVER_NAME
     label: "Full Server Name for Enketo express"
     description: "Optional only if using USE_ENV_VAR set to true"
     required: true
-    default: "example.scancollect-form.scanterra.com"
+    default: "scancollect-form.scanterra.com"
     type: string
-
-  - variable: CSRF_COOKIE_DOMAIN
-    label: "Shared CSRF Cookie Domain"
-    description: "Optional only if using USE_ENV_VAR set to true"
-    required: true
-    default: ".scanterra.com"
-    type: string
-
+    group: Domain
   - variable: DJANGO_ALLOWED_HOSTS
     label: "Shared Django Allowed hosts"
     description: "Optional only if using USE_ENV_VAR set to true"
     required: true
     default: ".scanterra.com"
     type: string
+    group: Domain
+  - variable: CSRF_COOKIE_DOMAIN
+    label: "Shared CSRF Cookie Domain"
+    description: "Optional only if using USE_ENV_VAR set to true"
+    required: true
+    default: ".scanterra.com"
+    type: string
+    group: Domain
 
+    ## Email
+  - variable: USE_EXTERNAL_SMTP
+    label: "Use external SMTP host"
+    description: "Set to false to use local SMTP server for testing"
+    default: false
+    type: boolean
+    group: Email
+    show_subquestion_if: true
+    subquestions:
+    - variable: EMAIL_HOST
+      label: "SMTP host to use"
+      description: "Only used if using external SMTP"
+      default: "smtp"
+      type: string
+      group: Email
+    - variable: EMAIL_PORT
+      label: "SMTP port to use"
+      description: "Only used if using external SMTP"
+      default: "25"
+      type: string
+      group: Email
+    - variable: EMAIL_HOST_USER
+      label: "SMTP host user"
+      description: "Only used if using external SMTP"
+      default: "noreply"
+      type: string
+      group: Email
+    - variable: EMAIL_HOST_PASSWORD
+      label: "Email host password"
+      description: "Only used if using external SMTP"
+      default: "docker"
+      type: string
+      group: Email
+    - variable: EMAIL_USE_TLS
+      label: "Email TLS settings"
+      description: "Only used if using external SMTP"
+      type: enum
+      default: 'False'
+      options:
+        - 'True'
+        - 'False'
+      group: Email
+
+    ## Schedule
+  - variable: BORG_BACKUP_FREQUENCY
+    label: "Rancher Cron schedule of Borg backup service."
+    type: string
+    default: '0 */5 * * *'
+    group: Schedule
+  - variable: BORG_PASSPHRASE
+    label: "BORG Passphrase for encryption."
+    type: string
+    default: 'kobotoolboxincrementalbackup'
+    group: Schedule
+
+  - variable: POSTGRES_BACKUP_SCHEDULE
+    label: "Cron schedule of Postgres backup."
+    type: string
+    default: '0 2 * * 0'
+    group: Schedule
+
+  - variable: MONGO_BACKUP_SCHEDULE
+    label: "Cron schedule of Mongo db backup."
+    type: string
+    default: '0 1 * * 0'
+    group: Schedule
+
+  - variable: KOBOCAT_MEDIA_BACKUP_SCHEDULE
+    label: "Cron schedule of KoboCat media backup."
+    type: string
+    default: '0 0 * * 0'
+    group: Schedule
+
+    ## Misc
+  - variable: ENKETO_API_TOKEN
+    label: "Enketo API Token"
+    description: "Can be initialized with random string."
+    required: true
+    default: enketoapitoken
+    type: string
+    group: Misc
+  - variable: KPI_DJANGO_DEBUG
+    label: "KPI Django Debug"
+    description: "Enable KPI Debugging"
+    type: enum
+    default: "False"
+    options:
+    - 'True'
+    - 'False'
+    group: Misc
+  - variable: KOBOCAT_DJANGO_DEBUG
+    label: "Kobocat Django Debug"
+    description: "Enable Kobocat Debugging"
+    type: enum
+    default: "False"
+    options:
+    - 'True'
+    - 'False'
+    group: Misc
+  - variable: DJANGO_SECRET_KEY
+    label: "Django Secret Key"
+    description: "Can be initialized with random string."
+    required: true
+    default: "DJANGO_SECRET_KEY"
+    type: string
+    group: Misc
+  - variable: USE_ENV_VAR
+    label: "Use custom defined environment variable"
+    description: "Set this to true if you choose to define the rest of env var by yourself"
+    required: true
+    default: true
+    type: boolean
+    group: Misc
   - variable: TASK_SOFT_TIMEOUT
     label: "Task Timeout in seconds"
     description: "Celery task time limits in seconds"
     required: true
-    default: 7200
-    type: int
-
+    default: "7200"
+    type: string
+    group: Misc
   - variable: TASK_TIMEOUT
     label: "Task Timeout in seconds"
     description: "Cut off time for celery waiting for a task to be done"
     required: true
-    default: 9000
-    type: int
+    default: "9000"
+    type: string
+    group: Misc
 
+    ## Custom Theme
   - variable: USE_CUSTOM_KOBOCAT
     label: "Use custom kobocat theme"
     description: "Set to true to use a repo specified in CUSTOM_KOBOCAT_THEME_APP_PIP_URL variable"
     required: true
     default: false
     type: boolean
-
-  - variable: CUSTOM_KOBOCAT_THEME_APP_PIP_URL
-    label: "A repo for custom kobocat theme"
-    description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
-    default: "git+https://git@github.com/scanterra/custom_kobocat_theme.git@develop"
-    type: string
-
-  - variable: CUSTOM_KOBOCAT_DJANGO_SETTINGS_MODULE
-    label: "A string to replace the settings module"
-    description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
-    default: "custom_kobocat_theme.settings"
-    type: string
-
-  - variable: CUSTOM_KOBOCAT_PYTHONPATH
-    label: "A string to override the PYTHONPATH"
-    description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
-    default: "/srv/src/kobocat:/srv/src/custom_kobocat_theme"
-    type: string
-
-  - variable: CUSTOM_KOBOCAT_THEME_DEPLOY_KEY
-    label: "SSH key to access custom kobocat repo"
-    description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
-    type: string
+    group: Theme
+    show_subquestion_if: true
+    subquestions:
+    - variable: CUSTOM_KOBOCAT_THEME_APP_PIP_URL
+      label: "A repo for custom kobocat theme"
+      description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
+      default: "git+https://git@github.com/scanterra/custom_kobocat_theme.git@develop"
+      type: string
+      group: Theme
+    - variable: CUSTOM_KOBOCAT_DJANGO_SETTINGS_MODULE
+      label: "A string to replace the settings module"
+      description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
+      default: "custom_kobocat_theme.settings"
+      type: string
+      group: Theme
+    - variable: CUSTOM_KOBOCAT_PYTHONPATH
+      label: "A string to override the PYTHONPATH"
+      description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
+      default: "/srv/src/kobocat:/srv/src/custom_kobocat_theme"
+      type: string
+      group: Theme
+    - variable: CUSTOM_KOBOCAT_THEME_DEPLOY_KEY
+      label: "SSH key to access custom kobocat repo"
+      description: "Applicable only if USE_CUSTOM_KOBOCAT sets to true"
+      default: ""
+      type: string
+      group: Theme

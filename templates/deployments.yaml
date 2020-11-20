@@ -37,29 +37,14 @@ spec:
           {{- $specificEnvs := set $.Values "name" $idx }}
           {{- template "specific-envs" $specificEnvs }}
         {{- end }}
-        {{- if not (empty .volumes) }}
-        volumeMounts:
-          {{- with .volumes }}
-            {{- range $idx, $val := .}}
-          - mountPath: {{ $val }}
-            name: {{ $idx }}
-            {{- end }}
-          {{- end }}
-        {{- end }}
+        {{- if not (empty $deployment.volumes) }}
+          {{- include "volumeMounts" $deployment | trim | nindent 8 }}
+        {{- end}}
       imagePullSecrets:
         - name: {{ $.Values.imagePullSecrets }}
       restartPolicy: {{ $.Values.restartPolicy }}
       serviceAccountName: ""
-      {{- if not (empty .volumes) }}
-      volumes:
-        {{- with $deployment.volumes }}
-            {{- range $idx, $val := .}}
-        - name: {{ $idx }}
-          persistentVolumeClaim:
-            claimName: {{ $idx }}
-            {{- end }}
-        {{- end }}
-      {{- end }}
+      {{- include "volumes" $deployment | trim | nindent 6 }}
 status: {}
 {{- end }}
 {{ end }}

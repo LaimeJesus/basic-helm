@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: kobotoolbox-issuer-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: issuer@scanterra.com
+    privateKeySecretRef:
+      name: kobotoolbox-tls-prod
+    solvers:
+     - http01:
+        ingress:
+          class:

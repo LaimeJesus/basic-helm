@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-backups-kobocat
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -18,7 +18,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-backups-mongo
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -33,7 +33,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-backups-postgres
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -48,7 +48,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-borg-cache
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -63,7 +63,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-borg-repo
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -78,7 +78,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-borg-users-home
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -93,7 +93,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-log-kobocat
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -108,7 +108,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-log-kpi
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -123,7 +123,7 @@ kind: PersistentVolume
 metadata:
     name: kobotoolbox-log-nginx
 spec:
-    storageClassName: manual
+    storageClassName: local-storage
     capacity:
         storage: 100Mi
     accessModes:
@@ -138,7 +138,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-log-rabbitmq
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -153,7 +153,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-secrets
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -168,7 +168,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-db
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 1Gi
   accessModes:
@@ -183,7 +183,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-kobocatmedia
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -198,7 +198,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-kpimedia
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -213,7 +213,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-mongo
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -228,7 +228,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-redismaindata
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -243,7 +243,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-static-kobocat
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -258,7 +258,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-static-kpi
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:
@@ -272,7 +272,7 @@ kind: PersistentVolume
 metadata:
   name: kobotoolbox-vols-whoosh
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   capacity:
     storage: 100Mi
   accessModes:

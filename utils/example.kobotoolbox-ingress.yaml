@@ -1,0 +1,100 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: kobotoolbox-issuer-prod
+    field.cattle.io/ingressState: '{"a29ib3Rvb2xib3gtaW5ncmVzcy9rb2JvdG9vbGJveC9zY2FuY29sbGVjdC1mb3JtLWVkaXQuc2NhbnRlcnJhLnNoaXBvYy5jb20uYXIvLzkwMDA=":"","a29ib3Rvb2xib3gtaW5ncmVzcy9rb2JvdG9vbGJveC9zY2FuY29sbGVjdC1mb3JtLnNjYW50ZXJyYS5zaGlwb2MuY29tLmFyLy85MDA1":"","a29ib3Rvb2xib3gtaW5ncmVzcy9rb2JvdG9vbGJveC9zY2FuY29sbGVjdC5zY2FudGVycmEuc2hpcG9jLmNvbS5hci8vOTAwMQ==":"","c2VjcmV0LXN0YWdpbmc=":"kobotoolbox:secret-staging"}'
+    field.cattle.io/publicEndpoints: '[{"addresses":["134.209.123.50"],"port":443,"protocol":"HTTPS","serviceName":"kobotoolbox:nginx","ingressName":"kobotoolbox:kobotoolbox-ingress","hostname":"scancollect-form.scanterra.shipoc.com.ar","allNodes":false},{"addresses":["134.209.123.50"],"port":443,"protocol":"HTTPS","serviceName":"kobotoolbox:nginx","ingressName":"kobotoolbox:kobotoolbox-ingress","hostname":"scancollect.scanterra.shipoc.com.ar","allNodes":false},{"addresses":["134.209.123.50"],"port":443,"protocol":"HTTPS","serviceName":"kobotoolbox:nginx","ingressName":"kobotoolbox:kobotoolbox-ingress","hostname":"scancollect-form-edit.scanterra.shipoc.com.ar","allNodes":false}]'
+    meta.helm.sh/release-name: kobotoolbox
+    meta.helm.sh/release-namespace: kobotoolbox
+  creationTimestamp: "2020-11-19T10:15:38Z"
+  generation: 12
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    io.cattle.field/appId: kobotoolbox
+  managedFields:
+  - apiVersion: networking.k8s.io/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:meta.helm.sh/release-name: {}
+          f:meta.helm.sh/release-namespace: {}
+        f:labels:
+          .: {}
+          f:app.kubernetes.io/managed-by: {}
+          f:io.cattle.field/appId: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2020-11-19T10:15:38Z"
+  - apiVersion: extensions/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: traefik
+    operation: Update
+    time: "2020-11-19T10:15:38Z"
+  - apiVersion: extensions/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:cert-manager.io/issuer: {}
+      f:spec:
+        f:tls: {}
+    manager: Mozilla
+    operation: Update
+    time: "2020-11-19T11:34:27Z"
+  - apiVersion: extensions/v1beta1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:field.cattle.io/ingressState: {}
+          f:field.cattle.io/publicEndpoints: {}
+      f:spec:
+        f:rules: {}
+    manager: rancher
+    operation: Update
+    time: "2020-11-19T11:34:27Z"
+  name: kobotoolbox-ingress
+  namespace: kobotoolbox
+  resourceVersion: "619954"
+  selfLink: /apis/extensions/v1beta1/namespaces/kobotoolbox/ingresses/kobotoolbox-ingress
+  uid: 658fdf3c-7e32-4b73-a7e4-35483aedad74
+spec:
+  rules:
+  - host: scancollect-form.scanterra.shipoc.com.ar
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 9005
+        pathType: ImplementationSpecific
+  - host: scancollect.scanterra.shipoc.com.ar
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 9001
+        pathType: ImplementationSpecific
+  - host: scancollect-form-edit.scanterra.shipoc.com.ar
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 9000
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - scancollect-form-edit.scanterra.shipoc.com.ar
+    - scancollect-form.scanterra.shipoc.com.ar
+    - scancollect.scanterra.shipoc.com.ar
+    secretName: kobotoolbox-tls-prod
+status:
+  loadBalancer:
+    ingress:
+    - ip: 134.209.123.50

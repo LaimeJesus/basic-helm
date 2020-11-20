@@ -1,21 +1,25 @@
 
-{{- define "common-envs" -}}
-          # apps
+{{- define "common-envs" }}
+          # common-envs
           - name: KOBO_SUPERUSER_USERNAME
             value: {{ .KOBO_SUPERUSER_USERNAME }}
           - name: KOBO_SUPERUSER_PASSWORD
             value: {{ .KOBO_SUPERUSER_PASSWORD }}
           - name: KOBO_SUPPORT_EMAIL
             value: {{ .KOBO_SUPPORT_EMAIL }}
+          - name: CSRF_COOKIE_DOMAIN
+            value: {{ .CSRF_COOKIE_DOMAIN }}
+          - name: DJANGO_ALLOWED_HOSTS
+            value: {{ .DJANGO_ALLOWED_HOSTS }}
           {{- if eq (.KOBOTOOLBOX_PROTOCOL | quote) "http" }}
           - name: HOST_ADDRESS
             value: {{ .PUBLIC_DOMAIN_NAME }}
           - name: KPI_PUBLIC_PORT
-            value: 9000
+            value: "9000"
           - name: KOBOCAT_PUBLIC_PORT
-            value: 9001
+            value: "9001"
           - name: ENKETO_EXPRESS_PUBLIC_PORT
-            value: 9005
+            value: "9005"
           {{- end }}
           {{- if eq (.KOBOTOOLBOX_PROTOCOL | quote) "https" }}
           - name: PUBLIC_DOMAIN_NAME
@@ -29,17 +33,13 @@
           {{- end }}
           {{- if eq .USE_ENV_VAR true }}
           - name: USE_ENV_VAR
-            value: {{ .USE_ENV_VAR }}
+            value: {{ .USE_ENV_VAR | quote }}
           - name: KOBOFORM_URL
             value: {{ .KOBOTOOLBOX_PROTOCOL }}://{{ .KOBOFORM_SERVER_NAME }}
           - name: KOBOCAT_URL
             value: {{ .KOBOTOOLBOX_PROTOCOL }}://{{ .KOBOCAT_SERVER_NAME }}
           - name: ENKETO_URL
             value: {{ .KOBOTOOLBOX_PROTOCOL }}://{{ .ENKETO_SERVER_NAME }}
-          - name: CSRF_COOKIE_DOMAIN
-            value: {{ .CSRF_COOKIE_DOMAIN }}
-          - name: DJANGO_ALLOWED_HOSTS
-            value: {{ .DJANGO_ALLOWED_HOSTS }}
           - name: KOBOFORM_SERVER_NAME
             value: {{ .KOBOFORM_SERVER_NAME }}
           - name: KOBOCAT_SERVER_NAME
@@ -48,7 +48,7 @@
             value: {{ .ENKETO_SERVER_NAME }}
           {{- end }}
           - name: TEMPLATE_DEBUG
-            value: False
+            value: "False"
           # web server settings
           - name: KPI_WEB_SERVER
             value: {{ .PROXY_WEB_SERVER }}
@@ -71,25 +71,26 @@
             value: django.core.mail.backends.smtp.EmailBackend
           {{- if eq .USE_EXTERNAL_SMTP true }}
           - name: EMAIL_HOST
-            value: {{ .EMAIL_HOST }}
+            value: {{ .EMAIL_HOST | quote }}
           - name: EMAIL_PORT
-            value: {{ .EMAIL_PORT }}
+            value: {{ .EMAIL_PORT | quote }}
           - name: EMAIL_HOST_USER
-            value: {{ .EMAIL_HOST_USER }}
+            value: {{ .EMAIL_HOST_USER | quote }}
           - name: EMAIL_HOST_PASSWORD
-            value: {{ .EMAIL_HOST_PASSWORD }}
+            value: {{ .EMAIL_HOST_PASSWORD | quote }}
           - name: EMAIL_USE_TLS
-            value: {{ .EMAIL_USE_TLS }}
+            value: {{ .EMAIL_USE_TLS | quote }}
           {{- end }}
           - name: DEFAULT_FROM_EMAIL
             value: {{ .KOBO_SUPPORT_EMAIL }}
           - name: CELERYD_TASK_TIME_LIMIT
-            value: {{ .TASK_TIMEOUT }}
+            value: {{ .TASK_TIMEOUT | quote }}
           - name: CELERYD_TASK_SOFT_TIME_LIMIT
-            value: {{ .TASK_SOFT_TIMEOUT }}
+            value: {{ .TASK_SOFT_TIMEOUT | quote }}
 {{- end }}
 
-{{- define "specific-envs" -}}
+{{- define "specific-envs" }}
+          # specific-envs
   {{- if eq .name "kobocat" }}
           - name: POSTGRES_BACKUP_SCHEDULE
             value: {{ .POSTGRES_BACKUP_SCHEDULE }}
@@ -115,7 +116,7 @@
             value: onadata.settings.kc_environ
             {{- end }}
           - name: KOBOCAT_DJANGO_DEBUG
-            value: {{ .KOBOCAT_DJANGO_DEBUG }}
+            value: {{ .KOBOCAT_DJANGO_DEBUG | quote }}
           - name: DATABASE_URL
             value: postgis://{{ .POSTGRES_USER }}:{{ .POSTGRES_PASSWORD }}@postgres:{{ .POSTGRES_PORT }}/{{ .POSTGRES_DBNAME }}
           - name: KOBO_POSTGRES_DB_NAME
@@ -127,7 +128,7 @@
   {{- end }}
   {{- if eq .name "kpi" }}
           - name: KPI_DJANGO_DEBUG
-            value: {{ .KPI_DJANGO_DEBUG }}
+            value: {{ .KPI_DJANGO_DEBUG | quote }}
           - name: KPI_PREFIX
             value: {{ .KPI_PREFIX }}
           - name: KPI_BROKER_URL
@@ -157,7 +158,7 @@
           - name: PGPASSWORD
             value: {{ .POSTGRES_PASSWORD }}
           - name: PGPORT
-            value: {{ .POSTGRES_PORT }}
+            value: {{ .POSTGRES_PORT | quote }}
           - name: PGUSER
             value: {{ .POSTGRES_USER }}
           - name: POSTGRES_DBNAME
@@ -167,7 +168,7 @@
           - name: POSTGRES_PASSWORD
             value: {{ .POSTGRES_PASSWORD }}
           - name: POSTGRES_PORT
-            value: {{ .POSTGRES_PORT }}
+            value: {{ .POSTGRES_PORT | quote }}
           - name: POSTGRES_USER
             value: {{ .POSTGRES_USER }}
           - name: WITH_POSTGIS
@@ -265,4 +266,25 @@
           - name: USERS
             value: root
   {{- end }}
+{{- end }}
+
+{{- define "volumeMounts" }}
+  {{- if not (empty .volumes) }}
+volumeMounts:
+  {{- range $idx, $val := .volumes }}
+  - mountPath: {{ $val }}
+    name: {{ $idx }}
+  {{- end }}
+{{- end }}
+{{- end }}
+
+{{- define "volumes" }}
+{{- if not (empty .volumes) }}
+volumes:
+  {{- range $idx, $val := .volumes }}
+  - name: {{ $idx }}
+    persistentVolumeClaim:
+      claimName: {{ $idx }}
+    {{- end }}
+{{- end }}
 {{- end }}

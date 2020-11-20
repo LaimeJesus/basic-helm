@@ -12,17 +12,58 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "user"
+  name: "kobotoolbox-user"
 
 # Rancher Charts no soporta array field: https://github.com/rancher/rancher/issues/24918
 imagePullSecrets: dockerhub
-restartPolicy: Always
 imagePullPolicy: Always
+restartPolicyDeployments: Always
+restartPolicyCronjobs: OnFailure
 serviceAccountName: ""
+
+ingress:
+  enabled: true
+  name: kobotoolbox-ingress
+  rules:
+    kpi:
+      service: nginx
+      path: "/"
+      port: "9000"
+    kobocat:
+      service: nginx
+      path: "/"
+      port: "9001"
+    enketo-express:
+      service: nginx
+      path: "/"
+      port: "9005"
+
+certManager:
+  enabled: false
+  issuer: letsencrypt-issuer
+  secretName: secret-tls
+  secretRef: secret-ref
+  email: scanagroempresa@scanterra.com
+  staging: true
+
+cronjobs:
+  borg-backup-service:
+    image: lucernae/borgbackup:1.1.8
+    deploy: true
+    envs: true
+    schedule: 0 */5 * * *
+    volumes:
+      kobotoolbox-borg-users-home: /root
+      kobotoolbox-borg-repo: /borg/repo
+      kobotoolbox-borg-cache: /root/.cache/borg
+      kobotoolbox-vols-kobocatmedia: /borg/data/kobocatmedia
+      kobotoolbox-vols-kpimedia: /borg/data/kpimedia
+      kobotoolbox-backups-postgres: /borg/data/rawbackups/postgres
+      kobotoolbox-backups-mongo: /borg/data/rawbackups/mongo
 
 deployments:
   kpi:
-    image: scanterra/kobotoolbox_kpi:develop
+    image: scanterra/kobotoolbox_kpi:k8-deploy
     deploy: true
     envs: true
     initContainers:
@@ -35,8 +76,8 @@ deployments:
       kobotoolbox-vols-static-kpi: /srv/static
       kobotoolbox-vols-kpimedia: /srv/src/kpi/media
       kobotoolbox-vols-whoosh: /srv/whoosh
-      kobotoolbox-vols-kobocatmedia: /srv/src/kobocat/media
       kobotoolbox-log-kpi: /srv/logs
+      kobotoolbox-vols-kobocatmedia: /srv/src/kobocat/media
   kobocat:
     image: scanterra/kobotoolbox_kobocat:2.018.31
     deploy: true
@@ -143,10 +184,6 @@ deployments:
     envs: true
     ports:
       default: 25
-  borg-backup-service:
-    image: lucernae/borgbackup:1.1.8
-    deploy: true
-    envs: true
   borg-backup-service-server:
     image: lucernae/borgbackup:1.1.8
     deploy: true
@@ -160,7 +197,7 @@ deployments:
       kobotoolbox-backups-postgres: /borg/data/rawbackups/postgres
       kobotoolbox-backups-mongo: /borg/data/rawbackups/mongo
 
-storageClass: "manual"
+storageClass: "local-storage"
 accessMode: "ReadWriteOnce"
 
 volumeClaims:
@@ -180,6 +217,9 @@ volumeClaims:
   kobotoolbox-vols-static-kobocat: "100Mi"
   kobotoolbox-vols-static-kpi: "100Mi"
   kobotoolbox-vols-whoosh: "100Mi"
+  kobotoolbox-borg-cache: "100Mi"
+  kobotoolbox-borg-users-home: "100Mi"
+  kobotoolbox-borg-repo: "100Mi"
 
 # envs
 ENKETO_API_TOKEN: enketoapitoken
@@ -189,21 +229,21 @@ KOBO_SUPERUSER_PASSWORD: "KOBO_SUPERUSER_PASSWORD"
 PGHOST: postgres
 PGPASSWORD: PGPASSWORD
 POSTGRES_HOST: "postgres"
-POSTGRES_PORT: 5432
+POSTGRES_PORT: "5432"
 POSTGRES_USER: "kobo_superadmin"
-POSTGRES_PASSWORD: "j3cA6eCIneo5nU5qjK8yXycalu9B2I41"
+POSTGRES_PASSWORD: "POSTGRES_PASSWORD"
 POSTGRES_DBNAME: kobotoolbox
 KOBO_SUPPORT_EMAIL: "soporte@scanterra.com"
 PUBLIC_DOMAIN_NAME: "scanterra.com"
-WEBSERVER_PORT: 82
+WEBSERVER_PORT: '80'
 KOBOTOOLBOX_PROTOCOL: https
 PROXY_WEB_SERVER: uWSGI
-KOBOFORM_PUBLIC_SUBDOMAIN: "cloneprod.scancollect-form-edit"
-KOBOCAT_PUBLIC_SUBDOMAIN: "cloneprod.scancollect"
-ENKETO_EXPRESS_PUBLIC_SUBDOMAIN: "cloneprod.scancollect-form"
+KOBOFORM_PUBLIC_SUBDOMAIN: "scancollect-form-edit"
+KOBOCAT_PUBLIC_SUBDOMAIN: "scancollect"
+ENKETO_EXPRESS_PUBLIC_SUBDOMAIN: "scancollect-form"
 USE_EXTERNAL_SMTP: false
 EMAIL_HOST: smtp
-EMAIL_PORT: 25
+EMAIL_PORT: '25'
 EMAIL_HOST_USER: noreply
 EMAIL_HOST_PASSWORD: docker
 EMAIL_USE_TLS: 'False'
@@ -213,18 +253,18 @@ POSTGRES_BACKUP_SCHEDULE: '0 2 * * 0'
 MONGO_BACKUP_SCHEDULE: '0 1 * * 0'
 KOBOCAT_MEDIA_BACKUP_SCHEDULE: '0 0 * * 0'
 USE_ENV_VAR: true
-KOBOFORM_SERVER_NAME: "cloneprod.scancollect-form-edit.scanterra.com"
-KOBOCAT_SERVER_NAME: "cloneprod.scancollect.scanterra.com"
-ENKETO_SERVER_NAME: "cloneprod.scancollect-form.scanterra.com"
+KOBOFORM_SERVER_NAME: "scancollect-form-edit.scanterra.com"
+KOBOCAT_SERVER_NAME: "scancollect.scanterra.com"
+ENKETO_SERVER_NAME: "scancollect-form.scanterra.com"
 CSRF_COOKIE_DOMAIN: ".scanterra.com"
 DJANGO_ALLOWED_HOSTS: ".scanterra.com"
-TASK_SOFT_TIMEOUT: 7200
-TASK_TIMEOUT: 9000
+TASK_SOFT_TIMEOUT: '7200'
+TASK_TIMEOUT: '9000'
 USE_CUSTOM_KOBOCAT: false
 CUSTOM_KOBOCAT_THEME_APP_PIP_URL: "git+https://git@github.com/scanterra/custom_kobocat_theme.git@develop"
-CUSTOM_KOBOCAT_THEME_DEPLOY_KEY: ""
 CUSTOM_KOBOCAT_DJANGO_SETTINGS_MODULE: "custom_kobocat_theme.settings"
 CUSTOM_KOBOCAT_PYTHONPATH: "/srv/src/kobocat:/srv/src/custom_kobocat_theme"
+CUSTOM_KOBOCAT_THEME_DEPLOY_KEY: ""
 ARCHIVE_FILENAME: /backups/postgres_backup
 DUMPPREFIX: postgres_backup
 
@@ -233,10 +273,10 @@ MONGO_DATA: /srv/db
 POSTGRES_BACKUP_ARCHIVE_FILENAME: postgres_backup_kobotoolbox.pg_restore
 
 KOBOCAT_BROKER_URL: amqp://kobocat:kobocat@rabbit:5672/kobocat
-KOBOCAT_DJANGO_DEBUG: False
+KOBOCAT_DJANGO_DEBUG: 'False'
 
 KPI_BROKER_URL: amqp://kpi:kpi@rabbit:5672/kpi
-KPI_DJANGO_DEBUG: False
+KPI_DJANGO_DEBUG: 'False'
 KPI_PREFIX: /
 
 DJANGO_LANGUAGE_CODES: en fr es ar zh-hans hi ku

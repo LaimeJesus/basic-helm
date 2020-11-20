@@ -1,0 +1,42 @@
+{{- if .Values.ingress.enabled }}
+{{- with .Values.ingress }}
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .name }}
+  annotations:
+    {{- if $.Values.certManager.enabled }}
+    cert-manager.io/issuer: {{ $.Values.certManager.issuer }}
+    ingress.kubernetes.io/ssl-redirect: "true"
+    # traefik.ingress.kubernetes.io/redirect-entry-point: https
+    {{- end }}
+spec:
+  {{- if $.Values.certManager.enabled }}
+  tls:
+  - hosts:
+    - {{ $.Values.KOBOFORM_SERVER_NAME }}
+    - {{ $.Values.KOBOCAT_SERVER_NAME }}
+    - {{ $.Values.ENKETO_SERVER_NAME }}
+    secretName: {{ $.Values.certManager.secretName }}
+  {{- end }}
+  rules:
+    {{- range $id, $rule := .rules }}
+    {{- if eq $id "kpi" }}
+    - host: {{ $.Values.KOBOFORM_SERVER_NAME }}
+    {{- end }}
+    {{- if eq $id "kobocat" }}
+    - host: {{ $.Values.KOBOCAT_SERVER_NAME }}
+    {{- end }}
+    {{- if eq $id "enketo-express" }}
+    - host: {{ $.Values.ENKETO_SERVER_NAME }}
+    {{- end }}
+      http:
+        paths:
+        - path: {{ $rule.path }}
+          backend:
+            serviceName: {{ $rule.service }}
+            servicePort: {{ $rule.port }}
+    {{- end }}
+{{- end }}
+{{- end }}

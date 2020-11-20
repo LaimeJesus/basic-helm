@@ -1,0 +1,23 @@
+{{- if and .Values.certManager.enabled .Values.ingress.enabled }}
+{{- with .Values.certManager }}
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: {{ .issuer }}
+spec:
+  acme:
+    {{- if .staging }}
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    {{- else }}
+    server: https://acme-v02.api.letsencrypt.org/directory
+    {{- end }}
+    email: {{ .email }}
+    privateKeySecretRef:
+      name: {{ .secretRef }}
+    solvers:
+     - http01:
+        ingress:
+          class:
+{{- end }}
+{{- end }}

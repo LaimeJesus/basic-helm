@@ -1,0 +1,46 @@
+{{ range $idx, $cronjob := .Values.cronjobs }}
+{{- if $cronjob.deploy }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ $idx }}
+  labels:
+    io.kompose.service: {{ $idx }}
+spec:
+  schedule: {{ $cronjob.schedule }}
+  jobTemplate:
+    metadata:
+      name: {{ $idx }}
+      labels:
+        io.kompose.service: {{ $idx }}
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ $idx }}
+            image: {{ $cronjob.image }}
+            imagePullPolicy: {{ $.Values.imagePullPolicy }}
+            {{- if not (empty $cronjob.working_dir )}}
+            workingDir: {{ $cronjob.working_dir }}
+            {{- end }}
+            {{- if not (empty $cronjob.args) }}
+            args: 
+              {{- toYaml $cronjob.args | trim | nindent 14 }}
+            {{- end}}
+            {{- if not (empty $cronjob.volumes) }}
+              {{- include "volumeMounts" $cronjob | trim | nindent 12 }}
+            {{- end}}
+            {{- if not (empty $cronjob.envs) }}
+            env:
+              {{- $newValues := set $.Values "name" $idx }}
+              {{- include "specific-envs" $newValues | trim | nindent 6 }}
+            {{- end }}
+          imagePullSecrets:
+          - name: {{ $.Values.imagePullSecrets }}
+          restartPolicy: {{ $.Values.restartPolicyCronjobs }}
+          serviceAccountName: ""
+          {{- include "volumes" $cronjob | trim | nindent 10 }}
+status: {}
+{{- end }}
+{{- end }}
