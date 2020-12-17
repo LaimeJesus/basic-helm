@@ -144,7 +144,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-rabbitmq
+    path: /var/lib/tmp/kobotoolbox-log-rabbitmq
     type: DirectoryOrCreate
 
 ---
@@ -159,14 +159,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-secrets
+    path: /var/lib/tmp/kobotoolbox-secrets
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-db
+  name: kobotoolbox-db
 spec:
   storageClassName: local-storage
   capacity:
@@ -174,14 +174,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-db
+    path: /var/lib/tmp/kobotoolbox-db
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-kobocatmedia
+  name: kobotoolbox-kobocatmedia
 spec:
   storageClassName: local-storage
   capacity:
@@ -189,14 +189,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-kobocatmedia
+    path: /var/lib/tmp/kobotoolbox-kobocatmedia
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-kpimedia
+  name: kobotoolbox-kpimedia
 spec:
   storageClassName: local-storage
   capacity:
@@ -204,14 +204,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-kpimedia
+    path: /var/lib/tmp/kobotoolbox-kpimedia
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-mongo
+  name: kobotoolbox-mongo
 spec:
   storageClassName: local-storage
   capacity:
@@ -219,14 +219,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-mongo
+    path: /var/lib/tmp/kobotoolbox-mongo
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-redismaindata
+  name: kobotoolbox-redismaindata
 spec:
   storageClassName: local-storage
   capacity:
@@ -234,14 +234,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-redismaindata
+    path: /var/lib/tmp/kobotoolbox-redismaindata
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-static-kobocat
+  name: kobotoolbox-static-kobocat
 spec:
   storageClassName: local-storage
   capacity:
@@ -249,14 +249,14 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-static-kobocat
+    path: /var/lib/tmp/kobotoolbox-static-kobocat
     type: DirectoryOrCreate
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-static-kpi
+  name: kobotoolbox-static-kpi
 spec:
   storageClassName: local-storage
   capacity:
@@ -264,13 +264,13 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-static-kpi
+    path: /var/lib/tmp/kobotoolbox-static-kpi
     type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: kobotoolbox-vols-whoosh
+  name: kobotoolbox-whoosh
 spec:
   storageClassName: local-storage
   capacity:
@@ -278,7 +278,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: /var/lib/tmp/kobotoolbox-vols-whoosh
+    path: /var/lib/tmp/kobotoolbox-whoosh
     type: DirectoryOrCreate
 
 ---

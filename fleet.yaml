@@ -5,7 +5,7 @@ namespace: basic-helm
 helm:
   # repo: https://github.com/LaimeJesus/basic-helm
   releaseName: basic-helm
-  version: 0.0.1
+  version: 0.0.3
   values:
     nameOverride: "basic-helm-ov"
     fullnameOverride: "basic-helm-override"
